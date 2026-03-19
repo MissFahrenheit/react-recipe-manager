@@ -1,21 +1,62 @@
-# React + TypeScript + Vite + shadcn/ui
+# Pomelo — Recipe Manager
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+A React + TypeScript assignment of a personal recipe management mini-app.
 
-## Adding components
+---
 
-To add components to your app, run the following command:
+## Quick Start
 
+### With Docker
 ```bash
-npx shadcn@latest add button
+docker build -t recipe-box .
+docker run -p 3000:3000 recipe-box
 ```
 
-This will place the ui components in the `src/components` directory.
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Using components
+### Live Demo
 
-To use the components in your app, import them as follows:
+[https://react-recipe-manager-2x1nhpvqp-elviras-projects-a0568c57.vercel.app/](https://react-recipe-manager-2x1nhpvqp-elviras-projects-a0568c57.vercel.app/)
 
-```tsx
-import { Button } from "@/components/ui/button"
-```
+---
+
+## Screenshots
+
+*Coming soon.*
+
+---
+
+## Tech Stack
+
+| Technology | Version | Why |
+|---|---|---|
+| React | 19 | Required by assignment |
+| TypeScript | 5.9 | Required by assignment |
+| Docker + nginx | — | Required by assignment — multi-stage build for a small production image |
+| react-router-dom | 7 | Client-side routing |
+| shadcn/ui (with Tailwind CSS) | — | The one allowed UI library — headless and composable |
+| localStorage | — | Simple persistence, appropriate for a client-only app |
+
+---
+
+## UX Decisions
+
+*Content TBA.*
+
+---
+
+## Challenges
+
+*Content TBA.*
+
+---
+
+## Future Improvements
+
+*Content TBA.*
+
+---
+
+## Time Spent
+
+*Content TBA.*
