@@ -1,6 +1,5 @@
 import type { JSX } from "react"
 import type { Recipe } from "@/types"
-import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router-dom"
 import { Separator } from "./ui/separator"
 import {
@@ -13,36 +12,29 @@ import {
 // import { Skeleton } from "@/components/ui/skeleton"
 import { Clock, Utensils } from "lucide-react"
 import AddToFavorites from "./AddToFavorites"
+import DifficultyBadge from "./DifficultyBadge"
 
 type RecipeCardProps = {
   recipe: Recipe
 }
 
 export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
-  const difficultyColor = {
-    Easy: "bg-green-200",
-    Medium: "bg-orange-200",
-    Hard: "bg-purple-300",
-  }
-
   return (
-    <Card className="mx-auto w-full pt-0">
+    <Card className="w-full max-w-120 pt-0">
       <div className="relative">
         <img
           src={recipe.image}
           alt={recipe.name}
           className="relative z-20 aspect-video w-full object-cover"
         />
-        <AddToFavorites recipe={recipe} />
+        <AddToFavorites
+          recipe={recipe}
+          cssClass="absolute top-4 right-5 z-30 h-10 w-10 rounded-full bg-yellow-100 hover:bg-yellow-100 aria-pressed:bg-yellow-100 data-[state=on]:bg-yellow-200"
+        />
       </div>
       <CardHeader>
         <CardAction>
-          <Badge
-            variant="secondary"
-            className={difficultyColor[recipe.difficulty]}
-          >
-            {recipe.difficulty}
-          </Badge>
+          <DifficultyBadge difficulty={recipe.difficulty} cssClass="" />
         </CardAction>
         <CardTitle>
           <Link to={`recipe/${recipe.id}`}>{recipe.name}</Link>

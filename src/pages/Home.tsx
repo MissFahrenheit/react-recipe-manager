@@ -95,7 +95,9 @@ export default function Home(): JSX.Element {
             </Button>
           </div>
         )}
-        <div className="recipes flex flex-wrap gap-4">{recipeCards}</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          {recipeCards}
+        </div>
       </div>
       {/*<div className="font-mono text-xs text-muted-foreground">
         (Press <kbd>d</kbd> to toggle dark mode)

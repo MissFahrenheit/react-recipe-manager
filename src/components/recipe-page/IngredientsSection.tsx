@@ -2,16 +2,13 @@ import type { Ingredient } from "@/types"
 import type { JSX } from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Label } from "@/components/ui/label"
-import { Field } from "@/components/ui/field"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { ChevronsUpDown } from "lucide-react"
+import IngredientsList from "./IngredientsList"
 
 type IngredientsSectionProps = {
   recipeIngredients: Ingredient[]
@@ -38,30 +35,7 @@ export default function IngredientsSection({
         </CollapsibleTrigger>
       </div>
       <CollapsibleContent className="mt-3 flex flex-col gap-3 pr-2 text-sm">
-        {recipeIngredients.map((ingredient: Ingredient, idx: number) => (
-          <div key={`ingredient-${idx}`}>
-            <Field
-              orientation="horizontal"
-              className="has-data-checked:line-through"
-            >
-              <Checkbox id={`ingredient-${idx}`} />
-              <Label htmlFor={`ingredient-${idx}`}>
-                <span className="font-semibold">{ingredient.item}:</span>
-                <span className="font-normal">
-                  {ingredient.quantity} {ingredient?.unit}
-                </span>
-                {ingredient.note && (
-                  <span className="font-normal text-muted-foreground">
-                    ({ingredient.note})
-                  </span>
-                )}
-              </Label>
-            </Field>
-            {idx < recipeIngredients.length - 1 && (
-              <Separator className="mt-3" />
-            )}
-          </div>
-        ))}
+        <IngredientsList recipeIngredients={recipeIngredients} />
       </CollapsibleContent>
     </Collapsible>
   )
