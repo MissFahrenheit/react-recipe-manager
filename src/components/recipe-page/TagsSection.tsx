@@ -8,7 +8,7 @@ export default function TagsSection({
   recipeTags,
 }: TagsSectionProps): JSX.Element {
   return (
-    <section className="flex flex-wrap gap-1">
+    <section className="flex flex-wrap gap-2">
       {recipeTags.map((t: string) => (
         <Badge key={`tag-${t}`} variant="outline">
           {t}

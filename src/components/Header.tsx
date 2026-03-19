@@ -15,7 +15,7 @@ export default function Header(): JSX.Element {
   }
 
   return (
-    <header className="flex justify-between px-4 py-3">
+    <header className="fixed inset-x-0 top-0 z-50 flex h-header items-center justify-between bg-white px-4 py-2">
       <a href="/" title="Home" className="flex items-center gap-3">
         <img src={pomelo} alt="Pomelo Recipe Manager" width="40" />
         <span className="text-2xl text-muted-foreground">Pomelo</span>

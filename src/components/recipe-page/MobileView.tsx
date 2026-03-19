@@ -1,6 +1,7 @@
 import type { Recipe } from "@/types"
 import type { JSX } from "react"
 import { formatDate } from "@/lib/helpers"
+import Footer from "@/components/Footer"
 import BasicInfoSection from "@/components/recipe-page/BasicInfoSection"
 import IngredientsSection from "@/components/recipe-page/IngredientsSection"
 import InstructionsSection from "@/components/recipe-page/InstructionsSection"
@@ -16,7 +17,7 @@ type MobileViewProps = {
 
 export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
   return (
-    <>
+    <article>
       <div className="relative">
         <img src={recipe.image} alt={recipe.name} />
         <AddToFavorites
@@ -60,6 +61,7 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
           </span>
         </div>
       </div>
-    </>
+      <Footer />
+    </article>
   )
 }

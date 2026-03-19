@@ -1,6 +1,7 @@
 import type { Recipe } from "@/types"
 import type { JSX } from "react"
 import { formatDate } from "@/lib/helpers"
+import Footer from "@/components/Footer"
 import AddToFavorites from "@/components/AddToFavorites"
 import DifficultyBadge from "@/components/DifficultyBadge"
 import BasicInfoSection from "@/components/recipe-page/BasicInfoSection"
@@ -21,42 +22,50 @@ type DesktopViewProps = {
 
 export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
   return (
-    <ResizablePanelGroup orientation="horizontal" className="">
-      <ResizablePanel defaultSize="60%">
-        <div className="flex flex-col gap-6 p-6">
-          <div>
-            <DifficultyBadge difficulty={recipe.difficulty} cssClass="mb-3" />
+    <article className="max-h-[calc(100svh-var(--header-height))] overflow-scroll">
+      <ResizablePanelGroup
+        orientation="horizontal"
+        className="max-h-[calc(100svh-var(--header-height))]"
+      >
+        <ResizablePanel defaultSize="63%">
+          <div className="flex flex-col gap-7 p-6">
+            <div>
+              <DifficultyBadge difficulty={recipe.difficulty} cssClass="mb-3" />
 
-            <div className="flex items-start justify-between gap-3">
-              <h1 className="text-2xl font-semibold">{recipe.name}</h1>
-              <div className="flex items-center gap-3">
-                <AddToFavorites
-                  recipe={recipe}
-                  cssClass="bg-white hover:!bg-muted data-[state=on]:bg-white data-[state=off]:bg-white aria-pressed:bg-white h-8"
-                />
-                <EditButton recipeId={recipe.id} />
+              <div className="flex items-start justify-between gap-3">
+                <h1 className="text-2xl font-semibold">{recipe.name}</h1>
+                <div className="flex items-center gap-3">
+                  <AddToFavorites
+                    recipe={recipe}
+                    cssClass="bg-white hover:!bg-muted data-[state=on]:bg-white data-[state=off]:bg-white aria-pressed:bg-white h-8"
+                  />
+                  <EditButton recipeId={recipe.id} />
+                </div>
               </div>
+              <BasicInfoSection recipe={recipe} />
             </div>
-            <BasicInfoSection recipe={recipe} />
+
+            {recipe.instructions && (
+              <InstructionsSection recipeInstructions={recipe.instructions} />
+            )}
+
+            {recipe.tags && (
+              <div className="pt-6">
+                <TagsSection recipeTags={recipe.tags} />
+              </div>
+            )}
+
+            <div>
+              <Separator className="mb-2" />
+              <span className="text-xs text-muted-foreground">
+                Created on: {formatDate(recipe.createdAt)}
+              </span>
+            </div>
           </div>
-
-          {recipe.instructions && (
-            <InstructionsSection recipeInstructions={recipe.instructions} />
-          )}
-
-          {recipe.tags && <TagsSection recipeTags={recipe.tags} />}
-
-          <div>
-            <Separator className="mb-2" />
-            <span className="text-xs text-muted-foreground">
-              Created on: {formatDate(recipe.createdAt)}
-            </span>
-          </div>
-        </div>
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize="40%">
-        <div className="h-screen">
+          <Footer />
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize="37%">
           <img src={recipe.image} alt={recipe.name} />
           <div className="p-6">
             {recipe.ingredients && (
@@ -68,8 +77,8 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
               </>
             )}
           </div>
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </article>
   )
 }

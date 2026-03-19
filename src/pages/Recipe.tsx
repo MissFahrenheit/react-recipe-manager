@@ -24,12 +24,12 @@ export default function Recipe(): JSX.Element {
   }, [recipeExists, navigate])
 
   return (
-    <article>
+    <>
       {isMobile && recipe ? (
         <MobileView recipe={recipe} />
       ) : (
         recipe && <DesktopView recipe={recipe} />
       )}
-    </article>
+    </>
   )
 }

@@ -40,10 +40,7 @@ export default function Filters({
           Filters
         </Button>
       </SheetTrigger>
-      <SheetContent
-        side="left"
-        className="data-[side=bottom]:max-h-[50vh] data-[side=top]:max-h-[50vh]"
-      >
+      <SheetContent side="left">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <Funnel className="size-4" /> Filter your recipes
