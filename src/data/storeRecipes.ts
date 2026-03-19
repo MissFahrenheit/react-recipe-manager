@@ -2,7 +2,7 @@ import type {
   Recipe,
   FilterValues,
   SortDirection,
-  SortableFields,
+  SortableField,
 } from "@/types"
 import { seedRecipes } from "./seedRecipes"
 
@@ -151,7 +151,7 @@ export function filterRecipes(filters: FilterValues): Recipe[] {
 
 export function sortBy(
   recipes: Recipe[],
-  field: SortableFields,
+  field: SortableField,
   direction: SortDirection
 ): Recipe[] {
   const multiplier = direction === "asc" ? 1 : -1
