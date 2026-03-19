@@ -1,0 +1,16 @@
+services:
+  recipe-box:
+    build: .
+    ports:
+      - "${PORT:-3000}:3000"
+```
+
+**.dockerignore**:
+```
+node_modules
+dist
+.env
+.env*.local
+.git
+.gitignore
+*.log
