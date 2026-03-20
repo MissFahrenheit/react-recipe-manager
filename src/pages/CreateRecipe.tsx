@@ -35,8 +35,8 @@ export default function Recipe(): JSX.Element {
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
 
   const navigate = useNavigate()
-  const DEFAULT_IMAGE =
-    "https://images.unsplash.com/photo-1604634077373-a279cadc62c5"
+  // const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1604634077373-a279cadc62c5"
+  const DEFAULT_IMAGE = "/default_recipe_image.jpg"
 
   function updateRecipeForm(field: keyof Recipe, value: unknown): void {
     setRecipeForm((prev) => ({ ...prev, [field]: value }))

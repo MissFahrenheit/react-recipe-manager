@@ -15,6 +15,7 @@ import TimeFilter from "./TimeFilter"
 import DifficultyFilter from "./DifficultyFilter"
 import CuisineFilter from "./CuisineFilter"
 import TagsFilter from "./TagsFilter"
+import FavoritesFilter from "./FavoritesFilter"
 import { Trash2, Funnel } from "lucide-react"
 
 type FiltersProps = {
@@ -76,6 +77,11 @@ export default function Filters({
 
             <TagsFilter
               selectedTags={filterValues.tags}
+              onChange={onFilterChange}
+            />
+
+            <FavoritesFilter
+              favoritesOnly={filterValues.favoritesOnly}
               onChange={onFilterChange}
             />
           </div>

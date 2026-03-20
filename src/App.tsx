@@ -16,6 +16,7 @@ export function App() {
           <Route path="/recipe/:recipeId" element={<RecipePage />} />
           <Route path="/recipe/:recipeId/edit" element={<EditRecipe />} />
           <Route path="/404" element={<Error404 />} />
+          <Route path="*" element={<Error404 />} />
         </Route>
       </Routes>
     </>

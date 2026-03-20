@@ -32,6 +32,7 @@ export default function Home(): JSX.Element {
     difficulty: "Any",
     cuisine: "",
     tags: [],
+    favoritesOnly: false,
   }
   const [filterValues, setFilterValues] =
     useState<FilterValues>(defaultFilterValues)

@@ -35,4 +35,5 @@ export interface FilterValues {
   difficulty: DifficultyOption
   cuisine: string
   tags: string[]
+  favoritesOnly: boolean
 }

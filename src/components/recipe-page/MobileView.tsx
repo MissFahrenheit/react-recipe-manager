@@ -7,6 +7,7 @@ import IngredientsSection from "@/components/recipe-page/IngredientsSection"
 import InstructionsSection from "@/components/recipe-page/InstructionsSection"
 import TagsSection from "@/components/recipe-page/TagsSection"
 import EditButton from "@/components/recipe-page/EditButton"
+import DeleteButton from "@/components/recipe-page/DeleteButton"
 import AddToFavorites from "@/components/AddToFavorites"
 import DifficultyBadge from "@/components/DifficultyBadge"
 import { Separator } from "@/components/ui/separator"
@@ -33,7 +34,10 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
         <div>
           <div className="flex items-start justify-between gap-3">
             <h1 className="text-2xl font-semibold">{recipe.name}</h1>
-            <EditButton recipeId={recipe.id} />
+            <div className="flex items-start gap-1">
+              <EditButton recipeId={recipe.id} />
+              <DeleteButton recipeId={recipe.id} showLabel={false} />
+            </div>
           </div>
           <BasicInfoSection recipe={recipe} />
         </div>

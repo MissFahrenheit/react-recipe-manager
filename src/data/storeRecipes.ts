@@ -71,6 +71,18 @@ export function storeUpdatedRecipe(
   localStorage.setItem(storageKey, JSON.stringify(updatedRecipes))
 }
 
+export function deleteRecipe(recipeId: string): void {
+  if (!storageKey) {
+    throw new Error("Storage key is not defined. Cannot store recipes.")
+  }
+
+  const recipes: Recipe[] = getRecipes()
+  const updatedRecipes = recipes.filter(
+    (recipe: Recipe) => recipe.id !== recipeId
+  )
+  localStorage.setItem(storageKey, JSON.stringify(updatedRecipes))
+}
+
 export function refreshRecipes(): Recipe[] {
   return storeSeedAndGetRecipes()
 }
@@ -144,6 +156,11 @@ export function filterRecipes(filters: FilterValues): Recipe[] {
     ) {
       return
     }
+
+    if (filters.favoritesOnly && !recipe.isFavorite) {
+      return
+    }
+
     return recipe
   })
   return filteredRecipes
