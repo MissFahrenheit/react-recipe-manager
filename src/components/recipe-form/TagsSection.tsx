@@ -107,7 +107,7 @@ export default function TagsSection({
               <>
                 {values.map((value: string) => (
                   <ComboboxChip
-                    className="rounded-full border-1 bg-white"
+                    className="rounded-full border bg-white"
                     key={value}
                   >
                     {value}

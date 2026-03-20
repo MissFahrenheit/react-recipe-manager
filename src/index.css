@@ -160,6 +160,6 @@
   }
 
   & input[data-slot="input-group-control"] {
-    @apply rounded-lg rounded-tr-none rounded-br-none border-1 border-input;
+    @apply rounded-lg rounded-tr-none rounded-br-none border border-input;
   }
 }
