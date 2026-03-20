@@ -16,7 +16,10 @@ export default function AddedIngredient({
   removeIngredient,
 }: AddedIngredientProps): JSX.Element {
   return (
-    <Item variant="outline" className="bg-muted/60 py-2">
+    <Item
+      variant="outline"
+      className="rounded-full border-yellow-300/50 bg-yellow-50 py-1"
+    >
       <ItemContent>
         <ItemTitle className="gap-1">
           <span className="font-semibold">{ingredient.item}:</span>
@@ -34,12 +37,12 @@ export default function AddedIngredient({
         <Button
           size="icon-sm"
           variant="outline"
-          className="rounded-full"
+          className="group rounded-full"
           aria-label="Remove ingredient"
           type="button"
           onClick={() => removeIngredient(index)}
         >
-          <Trash2 />
+          <Trash2 className="group-hover:stroke-red-600" />
         </Button>
       </ItemActions>
     </Item>

@@ -63,14 +63,16 @@ export default function IngredientsSection({
     <section className="flex flex-col gap-5">
       <h3 className="text-xl font-semibold">Ingredients</h3>
 
-      {recipeIngredients.map((ingredient: Ingredient, idx: number) => (
-        <AddedIngredient
-          key={idx}
-          ingredient={ingredient}
-          index={idx}
-          removeIngredient={handleRemoveIngredient}
-        />
-      ))}
+      <div className="flex flex-wrap gap-2">
+        {recipeIngredients.map((ingredient: Ingredient, idx: number) => (
+          <AddedIngredient
+            key={idx}
+            ingredient={ingredient}
+            index={idx}
+            removeIngredient={handleRemoveIngredient}
+          />
+        ))}
+      </div>
       <NewIngredient
         key={ingredientFormKey}
         addIngredient={handleAddIngredient}

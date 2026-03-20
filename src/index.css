@@ -4,6 +4,7 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/playfair-display";
+@import "@fontsource/sue-ellen-francisco";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -147,6 +148,7 @@
 
 @theme inline {
   --font-serif: "Playfair Display Variable", serif;
+  --font-logo: "Sue Ellen Francisco", cursive;
 }
 
 .white-form {

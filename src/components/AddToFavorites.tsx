@@ -30,13 +30,9 @@ export default function AddToFavorites({
       size="lg"
       data-state={favorite ? "on" : "off"}
       variant="outline"
-      // className="absolute top-1.5 right-1.5 z-30 hover:bg-transparent aria-pressed:bg-transparent data-[state=on]:bg-transparent"
       className={cn(cssClass, "")}
     >
-      <Heart
-        // className="size-5 stroke-green-300 group-data-[state=on]/toggle:fill-green-300"
-        className="size-5 fill-white stroke-gray-500 stroke-1 group-data-[state=on]/toggle:fill-green-300"
-      />
+      <Heart className="size-5 fill-white stroke-gray-500 group-data-[state=on]/toggle:fill-red-600 group-data-[state=on]/toggle:stroke-red-600" />
     </Toggle>
   )
 }

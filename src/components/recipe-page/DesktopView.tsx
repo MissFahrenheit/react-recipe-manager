@@ -51,7 +51,10 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
               </div>
 
               {recipe.instructions && (
-                <InstructionsSection recipeInstructions={recipe.instructions} />
+                <InstructionsSection
+                  recipeDifficulty={recipe.difficulty}
+                  recipeInstructions={recipe.instructions}
+                />
               )}
 
               {recipe.notes && (
@@ -69,17 +72,21 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
                 </span>
               </div>
             </div>
-            <Footer />
+            <Footer textAlign="left" />
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="37%">
-          <img src={recipe.image} alt={recipe.name} />
+          <img
+            src={recipe.image}
+            alt={recipe.name}
+            className="aspect-video w-full object-cover"
+          />
           <div className="p-6">
             {recipe.ingredients && (
               <>
                 <h2 className="mb-5 text-xl font-semibold">Ingredients</h2>
-                <div className="flex flex-col gap-3 pr-2">
+                <div className="flex flex-col gap-3 pr-2 md:gap-5">
                   <IngredientsList recipeIngredients={recipe.ingredients} />
                 </div>
               </>

@@ -8,6 +8,7 @@ import type {
 import { useState } from "react"
 import { filterRecipes, getRecipes, sortBy } from "@/data/storeRecipes"
 import Filters from "@/components/home/Filters"
+import SelectedFilters from "@/components/home/SelectedFilters"
 import Sorting from "@/components/home/Sorting"
 import RecipeCard from "@/components/RecipeCard"
 import { Button } from "@/components/ui/button"
@@ -46,8 +47,13 @@ export default function Home(): JSX.Element {
   function updateFilters(filterName: keyof FilterValues, value: unknown): void {
     const isTimeFilter =
       filterName === "maxPrepTime" || filterName === "maxCookTime"
-    const processedValue = isTimeFilter ? (value as number[])[0] : value
-    const updatedFilters = { ...filterValues, [filterName]: processedValue }
+    const processedValue: unknown = isTimeFilter
+      ? (value as number[])[0]
+      : value
+    const updatedFilters: FilterValues = {
+      ...filterValues,
+      [filterName]: processedValue,
+    }
     setFilterValues(updatedFilters)
     setRecipes(sortBy(filterRecipes(updatedFilters), sortField, sortDirection))
   }
@@ -55,6 +61,16 @@ export default function Home(): JSX.Element {
   function resetFilters(): void {
     setFilterValues(defaultFilterValues)
     setRecipes(sortBy(allRecipes, sortField, sortDirection))
+  }
+
+  function removeFilter(field: keyof FilterValues): void {
+    const defaultValue = defaultFilterValues[field]
+    const updatedFilters: FilterValues = {
+      ...filterValues,
+      [field]: defaultValue,
+    }
+    setFilterValues(updatedFilters)
+    setRecipes(sortBy(filterRecipes(updatedFilters), sortField, sortDirection))
   }
 
   function sortRecipes(field: SortableField, direction: SortDirection): void {
@@ -69,7 +85,7 @@ export default function Home(): JSX.Element {
         {/*<Button variant="outline" onClick={handleResetClick}>
           Reset recipes
         </Button>*/}
-        <div className="mb-5 flex w-full justify-between gap-3">
+        <div className="flex w-full justify-between gap-3">
           <Filters
             filterValues={filterValues}
             onFilterChange={updateFilters}
@@ -84,7 +100,13 @@ export default function Home(): JSX.Element {
         </div>
         {/*@TODO: note down why selected Sheet instead of Drawer, even through drawer closes more easily on mobiles
       reminder: it was because slider was not working well, it would move the drawer too*/}
-
+        {filtersSelected && (
+          <SelectedFilters
+            filterValues={filterValues}
+            defaultValues={defaultFilterValues}
+            onFilterRemove={removeFilter}
+          />
+        )}
         {filtersSelected && recipes.length === 0 && (
           <div className="flex h-30 flex-col items-center justify-center gap-3">
             <span className="text-muted-foreground">
@@ -96,7 +118,7 @@ export default function Home(): JSX.Element {
             </Button>
           </div>
         )}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {recipeCards}
         </div>
       </div>

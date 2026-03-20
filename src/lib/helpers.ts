@@ -19,3 +19,9 @@ export function formatDate(date: Date): string {
     day: "numeric",
   })
 }
+
+export const DIFFICULTY_CSS_CLASSES = {
+  Easy: "bg-yellow-100 text-yellow-800/90",
+  Medium: "bg-orange-100 text-orange-800/90",
+  Hard: "bg-red-100 text-red-800/90",
+}

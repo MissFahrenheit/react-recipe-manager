@@ -47,7 +47,10 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
         )}
 
         {recipe.instructions && (
-          <InstructionsSection recipeInstructions={recipe.instructions} />
+          <InstructionsSection
+            recipeDifficulty={recipe.difficulty}
+            recipeInstructions={recipe.instructions}
+          />
         )}
         {recipe.notes && (
           <section>

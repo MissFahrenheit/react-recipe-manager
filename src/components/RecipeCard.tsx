@@ -22,14 +22,16 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
   return (
     <Card className="w-full max-w-120 pt-0">
       <div className="relative">
-        <img
-          src={recipe.image}
-          alt={recipe.name}
-          className="relative z-20 aspect-video w-full object-cover"
-        />
+        <Link to={`recipe/${recipe.id}`}>
+          <img
+            src={recipe.image}
+            alt={recipe.name}
+            className="relative z-20 aspect-video w-full object-cover"
+          />
+        </Link>
         <AddToFavorites
           recipe={recipe}
-          cssClass="absolute top-4 right-5 z-30 h-10 w-10 rounded-full bg-yellow-100 hover:bg-yellow-100 aria-pressed:bg-yellow-100 data-[state=on]:bg-yellow-200"
+          cssClass="absolute top-4 right-5 z-30 h-10 w-10 rounded-full bg-white hover:bg-white aria-pressed:bg-white data-[state=on]:bg-white border-0 shadow-md hover:scale-110 transition-transform"
         />
       </div>
       <CardHeader>
@@ -37,7 +39,9 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
           <DifficultyBadge difficulty={recipe.difficulty} cssClass="" />
         </CardAction>
         <CardTitle>
-          <Link to={`recipe/${recipe.id}`}>{recipe.name}</Link>
+          <Link to={`recipe/${recipe.id}`} className="hover:text-red-600">
+            {recipe.name}
+          </Link>
         </CardTitle>
         <CardDescription>{recipe.description}</CardDescription>
         <div className="mt-2 flex items-center gap-3 text-sm text-gray-400">

@@ -10,7 +10,11 @@ export default function TagsSection({
   return (
     <section className="flex flex-wrap gap-2">
       {recipeTags.map((t: string) => (
-        <Badge key={`tag-${t}`} variant="outline">
+        <Badge
+          key={`tag-${t}`}
+          variant="outline"
+          className="h-auto bg-white px-3 py-1"
+        >
           {t}
         </Badge>
       ))}

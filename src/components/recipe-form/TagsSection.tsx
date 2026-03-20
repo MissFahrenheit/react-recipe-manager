@@ -52,7 +52,7 @@ export default function TagsSection({
 
   return (
     <section>
-      <h3 className="mb-4 text-xl font-semibold">Tags</h3>
+      <h3 className="mb-4 text-xl font-semibold md:mb-0">Tags</h3>
 
       <Combobox
         multiple
@@ -61,33 +61,42 @@ export default function TagsSection({
         value={recipeTags}
         onValueChange={onTagsUpdate}
       >
-        <ComboboxInput placeholder="Select recipe tags" showClear />
+        <div className="mb-2 flex flex-col gap-3 sm:flex-row">
+          <Field className="w-full sm:w-1/2">
+            <FieldLabel className="h-auto md:h-5"></FieldLabel>
+            <ComboboxInput placeholder="Select recipe tags" showClear />
+          </Field>
 
-        <Field className="mt-5 mb-3">
-          <FieldLabel htmlFor="tag">Or, add new tag</FieldLabel>
-          <InputGroup>
-            <InputGroupInput
-              name="tag"
-              id="tag"
-              type="text"
-              placeholder="My tag"
-              value={newTag}
-              onChange={(e) => setNewTag(e.target.value)}
-              onKeyDown={handleAddTag}
-            />
-            <InputGroupAddon align="inline-end">
-              <InputGroupButton
-                type="button"
-                onClick={addNewTag}
-                size="icon-xs"
-                className="ml-auto"
-              >
-                <Plus />
-                <span className="sr-only">Add</span>
-              </InputGroupButton>
-            </InputGroupAddon>
-          </InputGroup>
-        </Field>
+          <Field className="w-full sm:w-1/2">
+            <FieldLabel className="h-5" htmlFor="tag">
+              Or, add new tag
+            </FieldLabel>
+            <InputGroup>
+              <InputGroupInput
+                name="tag"
+                id="tag"
+                type="text"
+                placeholder="My tag"
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                onKeyDown={handleAddTag}
+                autoComplete="off"
+                aria-autocomplete="none"
+              />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  type="button"
+                  onClick={addNewTag}
+                  size="icon-xs"
+                  className="ml-auto"
+                >
+                  <Plus />
+                  <span className="sr-only">Add</span>
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+          </Field>
+        </div>
 
         <ComboboxChips
           ref={anchor}
@@ -97,7 +106,12 @@ export default function TagsSection({
             {(values: string[]) => (
               <>
                 {values.map((value: string) => (
-                  <ComboboxChip key={value}>{value}</ComboboxChip>
+                  <ComboboxChip
+                    className="rounded-full border-1 bg-white"
+                    key={value}
+                  >
+                    {value}
+                  </ComboboxChip>
                 ))}
               </>
             )}

@@ -11,6 +11,7 @@ import ImageSection from "@/components/recipe-form/ImageSection"
 import NotesSection from "@/components/recipe-form/NotesSection"
 import TagsSection from "@/components/recipe-form/TagsSection"
 import InstructionsSection from "@/components/recipe-form/InstructionsSection"
+import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
@@ -35,7 +36,6 @@ export default function Recipe(): JSX.Element {
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
 
   const navigate = useNavigate()
-  // const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1604634077373-a279cadc62c5"
   const DEFAULT_IMAGE = "/default_recipe_image.jpg"
 
   function updateRecipeForm(field: keyof Recipe, value: unknown): void {
@@ -83,43 +83,52 @@ export default function Recipe(): JSX.Element {
   }
 
   return (
-    <div className="p-5">
-      <h2 className="mb-4 text-2xl font-semibold">Add a new recipe</h2>
+    <>
+      <div className="flex flex-col items-center gap-4 p-5">
+        <h2 className="text-2xl font-semibold">Add a new recipe</h2>
 
-      <form
-        className="white-form flex flex-col gap-5"
-        onSubmit={(e) => {
-          e.preventDefault()
-          createRecipe()
-        }}
-      >
-        <BasicInfoSection recipeForm={recipeForm} onChange={updateRecipeForm} />
+        <form
+          className="white-form flex w-full max-w-lg flex-col gap-7"
+          onSubmit={(e) => {
+            e.preventDefault()
+            createRecipe()
+          }}
+        >
+          <BasicInfoSection
+            recipeForm={recipeForm}
+            onChange={updateRecipeForm}
+          />
 
-        <Separator />
-        <ImageSection onImageChange={setImageFile} />
-        <Separator />
+          <Separator />
+          <ImageSection onImageChange={setImageFile} />
+          <Separator />
 
-        <IngredientsSection
-          recipeIngredients={recipeIngredients}
-          ingredientsError={ingredientsError}
-          onUpdateIngredients={handleIngredientsUpdate}
-        />
-        <Separator />
-        <InstructionsSection
-          recipeInstructions={recipeInstructions}
-          instructionsError={instructionsError}
-          onUpdateInstructions={handleInstructionsUpdate}
-        />
+          <IngredientsSection
+            recipeIngredients={recipeIngredients}
+            ingredientsError={ingredientsError}
+            onUpdateIngredients={handleIngredientsUpdate}
+          />
+          <div>
+            <InstructionsSection
+              recipeInstructions={recipeInstructions}
+              instructionsError={instructionsError}
+              onUpdateInstructions={handleInstructionsUpdate}
+            />
 
-        <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
+            <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
+          </div>
+          <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
 
-        <Separator />
-        <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
-
-        <Button type="submit" size="lg" className="">
-          Create recipe
-        </Button>
-      </form>
-    </div>
+          <Button
+            type="submit"
+            size="lg"
+            className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
+          >
+            Create recipe
+          </Button>
+        </form>
+      </div>
+      <Footer />
+    </>
   )
 }

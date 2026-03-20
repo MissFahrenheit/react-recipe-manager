@@ -74,11 +74,11 @@ export default function Recipe(): JSX.Element {
   }
 
   return (
-    <div className="p-5">
+    <div className="flex flex-col items-center gap-4 p-5">
       <h2 className="mb-4 text-2xl font-semibold">Edit recipe</h2>
 
       <form
-        className="white-form flex flex-col gap-5"
+        className="white-form flex w-full max-w-lg flex-col gap-7"
         onSubmit={(e) => {
           e.preventDefault()
           updateRecipe()
@@ -95,19 +95,22 @@ export default function Recipe(): JSX.Element {
           ingredientsError={ingredientsError}
           onUpdateIngredients={handleIngredientsUpdate}
         />
-        <Separator />
-        <InstructionsSection
-          recipeInstructions={recipeInstructions}
-          instructionsError={instructionsError}
-          onUpdateInstructions={handleInstructionsUpdate}
-        />
+        <div>
+          <InstructionsSection
+            recipeInstructions={recipeInstructions}
+            instructionsError={instructionsError}
+            onUpdateInstructions={handleInstructionsUpdate}
+          />
+          <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
+        </div>
 
-        <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
-
-        <Separator />
         <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
 
-        <Button type="submit" size="lg" className="">
+        <Button
+          type="submit"
+          size="lg"
+          className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
+        >
           Update recipe
         </Button>
       </form>

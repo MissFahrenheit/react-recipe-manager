@@ -1,4 +1,4 @@
-# Pomelo — Recipe Manager
+# unforgetti — Recipe Manager
 
 A React + TypeScript assignment of a personal recipe management mini-app.
 

@@ -2,6 +2,7 @@ import type { JSX } from "react"
 import type { Difficulty } from "@/types"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { DIFFICULTY_CSS_CLASSES } from "@/lib/helpers"
 
 type DifficultyBadgeProps = {
   difficulty: Difficulty
@@ -12,16 +13,10 @@ export default function DifficultyBadge({
   difficulty,
   cssClass,
 }: DifficultyBadgeProps): JSX.Element {
-  const difficultyColor = {
-    Easy: "bg-green-200",
-    Medium: "bg-orange-200",
-    Hard: "bg-purple-300",
-  }
-
   return (
     <Badge
       variant="secondary"
-      className={cn(difficultyColor[difficulty], cssClass)}
+      className={cn(DIFFICULTY_CSS_CLASSES[difficulty], cssClass)}
     >
       {difficulty}
     </Badge>
