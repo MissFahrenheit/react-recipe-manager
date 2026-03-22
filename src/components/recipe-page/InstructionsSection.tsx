@@ -33,7 +33,7 @@ export default function InstructionsSection({
             >
               {idx + 1}
             </div>
-            <FieldLabel className="border-gray-100 bg-white py-2 shadow-md/4 has-data-checked:border-gray-100 has-data-checked:bg-neutral-50 has-data-checked:text-gray-400 has-data-checked:line-through">
+            <FieldLabel className="cursor-pointer border-gray-100 bg-white py-2 shadow-md/4 has-data-checked:border-gray-100 has-data-checked:bg-neutral-50 has-data-checked:text-gray-400 has-data-checked:line-through dark:border-neutral-500 dark:bg-neutral-700 has-data-checked:dark:border-neutral-700 has-data-checked:dark:bg-neutral-800 has-data-checked:dark:text-white/20">
               <Field orientation="horizontal">
                 <Checkbox id="toggle-checkbox-2" name="toggle-checkbox-2" />
                 <FieldContent>

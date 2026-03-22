@@ -156,7 +156,7 @@
   & textarea,
   & button[role="combobox"],
   & select {
-    @apply bg-white;
+    @apply bg-white dark:bg-transparent;
   }
 
   & input[data-slot="input-group-control"] {

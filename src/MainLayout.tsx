@@ -17,7 +17,7 @@ export default function MainLayout(): JSX.Element {
     <>
       <Header />
       <div className="grid min-h-svh grid-rows-[1fr_auto] pt-header">
-        <main className="bg-neutral-50">
+        <main className="bg-neutral-50 dark:bg-neutral-800">
           <Outlet />
         </main>
         {!isRecipePage && <Footer textAlign="left" />}

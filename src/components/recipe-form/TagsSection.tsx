@@ -63,7 +63,7 @@ export default function TagsSection({
       >
         <div className="mb-2 flex flex-col gap-3 sm:flex-row">
           <Field className="w-full sm:w-1/2">
-            <FieldLabel className="h-auto md:h-5"></FieldLabel>
+            <FieldLabel className="h-auto sm:h-5"></FieldLabel>
             <ComboboxInput placeholder="Select recipe tags" showClear />
           </Field>
 
@@ -100,14 +100,14 @@ export default function TagsSection({
 
         <ComboboxChips
           ref={anchor}
-          className="min-h-0 w-full border-none shadow-none"
+          className="min-h-0 w-full border-none shadow-none dark:bg-transparent"
         >
           <ComboboxValue>
             {(values: string[]) => (
               <>
                 {values.map((value: string) => (
                   <ComboboxChip
-                    className="rounded-full border bg-white"
+                    className="rounded-full border bg-white dark:bg-white/20"
                     key={value}
                   >
                     {value}

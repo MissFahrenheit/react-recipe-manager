@@ -13,7 +13,7 @@ export default function TagsSection({
         <Badge
           key={`tag-${t}`}
           variant="outline"
-          className="h-auto bg-white px-3 py-1"
+          className="h-auto bg-white px-3 py-1 dark:bg-white/20"
         >
           {t}
         </Badge>

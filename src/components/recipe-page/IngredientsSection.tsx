@@ -23,7 +23,7 @@ export default function IngredientsSection({
     <Collapsible
       open={ingredientsOpen}
       onOpenChange={setIngredientsOpen}
-      className="flex flex-col gap-3 bg-neutral-100 pt-2 pr-3 pb-4 pl-5"
+      className="flex flex-col gap-3 bg-neutral-100 pt-2 pr-3 pb-4 pl-5 dark:bg-neutral-600"
     >
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-xl font-semibold">Ingredients</h2>

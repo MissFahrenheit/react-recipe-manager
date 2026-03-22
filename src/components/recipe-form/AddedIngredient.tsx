@@ -18,7 +18,7 @@ export default function AddedIngredient({
   return (
     <Item
       variant="outline"
-      className="rounded-full border-yellow-300/50 bg-yellow-50 py-1"
+      className="rounded-full border-yellow-300/50 bg-yellow-50 py-1 dark:border-yellow-300/40 dark:bg-yellow-300/20"
     >
       <ItemContent>
         <ItemTitle className="gap-1">

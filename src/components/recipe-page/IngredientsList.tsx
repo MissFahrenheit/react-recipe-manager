@@ -18,7 +18,7 @@ export default function IngredientsList({
         <div key={`ingredient-${idx}`}>
           <Field
             orientation="horizontal"
-            className="group has-data-checked:text-gray-400 has-data-checked:line-through"
+            className="group has-data-checked:text-gray-400 has-data-checked:line-through has-data-checked:dark:text-white/20"
           >
             <Checkbox id={`ingredient-${idx}`} className="bg-white" />
             <Label htmlFor={`ingredient-${idx}`}>
@@ -27,7 +27,7 @@ export default function IngredientsList({
                 {ingredient.quantity} {ingredient?.unit}
               </span>
               {ingredient.note && (
-                <span className="font-normal text-muted-foreground group-has-data-checked:text-gray-400">
+                <span className="font-normal text-muted-foreground group-has-data-checked:text-gray-400 group-has-data-checked:dark:text-white/20">
                   ({ingredient.note})
                 </span>
               )}

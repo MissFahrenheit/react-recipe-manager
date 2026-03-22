@@ -30,7 +30,7 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
         />
         <DifficultyBadge
           difficulty={recipe.difficulty}
-          cssClass="absolute bottom-4 left-5 p-3 text-sm"
+          cssClass="absolute bottom-4 left-5 p-3 text-sm z-50"
         />
       </div>
       <div className="flex flex-col gap-6 p-5">

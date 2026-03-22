@@ -1,9 +1,11 @@
 import type { JSX } from "react"
+import type { Recipe, Ingredient } from "@/types"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import uploadFile from "@/lib/uploadFile"
-import type { Recipe, Ingredient } from "@/types"
 import { v4 as uuidv4 } from "uuid"
+import uploadFile from "@/lib/uploadFile"
+import { cn } from "@/lib/utils"
+import { RED_BUTTON_CSS_CLASSES } from "@/lib/helpers"
 import { addRecipe } from "@/data/storeRecipes"
 import IngredientsSection from "@/components/recipe-form/IngredientsSection"
 import BasicInfoSection from "@/components/recipe-form/BasicInfoSection"
@@ -130,7 +132,10 @@ export default function Recipe(): JSX.Element {
             <Button
               type="submit"
               size="lg"
-              className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
+              className={cn(
+                "mx-auto mt-5 w-full md:w-1/2",
+                RED_BUTTON_CSS_CLASSES
+              )}
               disabled={isSubmitting}
             >
               {isSubmitting && <Spinner data-icon="inline-start" />}
