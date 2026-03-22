@@ -31,7 +31,7 @@ export default function RecipeImage({
         />
       )}
       {!blurLoaded && (
-        <Skeleton className="absolute top-0 z-30 aspect-video w-full" />
+        <Skeleton className="rounded-0 absolute top-0 z-30 aspect-video w-full" />
       )}
     </>
   )
