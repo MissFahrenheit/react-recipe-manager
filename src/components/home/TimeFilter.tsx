@@ -2,7 +2,7 @@ import type { FilterValues } from "@/types"
 import type { JSX } from "react"
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
-import { getMaxTime } from "@/data/storeRecipes"
+import { getMaxTime } from "@/data/recipeService"
 
 type TimeFilterProps = {
   type: "prepTime" | "cookTime"

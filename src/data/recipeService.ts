@@ -8,14 +8,17 @@ import { seedRecipes } from "./seedRecipes"
 
 const storageKey: string | undefined = import.meta.env.VITE_STORAGE_KEY
 
-export function getRecipes(): Recipe[] {
+function getStorageKey(): string {
   if (!storageKey) {
     throw new Error(
       "Storage key is not defined. Check your .env file for VITE_STORAGE_KEY."
     )
   }
+  return storageKey
+}
 
-  const recipesJson: string | null = localStorage.getItem(storageKey)
+export function getRecipes(): Recipe[] {
+  const recipesJson: string | null = localStorage.getItem(getStorageKey())
 
   if (recipesJson) {
     return JSON.parse(recipesJson) as Recipe[]
@@ -25,41 +28,26 @@ export function getRecipes(): Recipe[] {
 }
 
 function storeSeedAndGetRecipes(): Recipe[] {
-  if (!storageKey) {
-    throw new Error("Storage key is not defined. Cannot store recipes.")
-  }
-
-  localStorage.setItem(storageKey, JSON.stringify(seedRecipes))
+  localStorage.setItem(getStorageKey(), JSON.stringify(seedRecipes))
   return seedRecipes
 }
 
 export function resetRecipesToSeed(): void {
-  if (!storageKey) {
-    throw new Error("Storage key is not defined. Cannot store recipes.")
-  }
   storeSeedAndGetRecipes()
 }
 
 export function addRecipe(newRecipe: Recipe): void {
-  if (!storageKey) {
-    throw new Error("Storage key is not defined. Cannot store recipes.")
-  }
-
-  const recipesJson: string | null = localStorage.getItem(storageKey)
+  const recipesJson: string | null = localStorage.getItem(getStorageKey())
   const recipes: Recipe[] = recipesJson ? JSON.parse(recipesJson) : []
   const updatedRecipes: Recipe[] = [...recipes, newRecipe]
-  localStorage.setItem(storageKey, JSON.stringify(updatedRecipes))
+  localStorage.setItem(getStorageKey(), JSON.stringify(updatedRecipes))
 }
 
 export function storeUpdatedRecipe(
   recipeId: string,
   updatedRecipe: Recipe
 ): void {
-  if (!storageKey) {
-    throw new Error("Storage key is not defined. Cannot store recipes.")
-  }
-
-  const recipesJson: string | null = localStorage.getItem(storageKey)
+  const recipesJson: string | null = localStorage.getItem(getStorageKey())
   const recipes: Recipe[] = recipesJson ? JSON.parse(recipesJson) : []
 
   const updatedRecipes: Recipe[] = recipes.map((recipe: Recipe) => {
@@ -68,19 +56,15 @@ export function storeUpdatedRecipe(
     }
     return recipe
   })
-  localStorage.setItem(storageKey, JSON.stringify(updatedRecipes))
+  localStorage.setItem(getStorageKey(), JSON.stringify(updatedRecipes))
 }
 
 export function deleteRecipe(recipeId: string): void {
-  if (!storageKey) {
-    throw new Error("Storage key is not defined. Cannot store recipes.")
-  }
-
   const recipes: Recipe[] = getRecipes()
   const updatedRecipes = recipes.filter(
     (recipe: Recipe) => recipe.id !== recipeId
   )
-  localStorage.setItem(storageKey, JSON.stringify(updatedRecipes))
+  localStorage.setItem(getStorageKey(), JSON.stringify(updatedRecipes))
 }
 
 export function refreshRecipes(): Recipe[] {

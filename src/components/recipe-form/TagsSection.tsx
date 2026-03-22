@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 import { useState } from "react"
-import { getAllUniqueTags } from "@/data/storeRecipes"
+import { getAllUniqueTags } from "@/data/recipeService"
 import {
   InputGroup,
   InputGroupAddon,

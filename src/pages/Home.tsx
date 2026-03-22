@@ -6,14 +6,14 @@ import type {
   SortDirection,
 } from "@/types"
 import { useState } from "react"
-import { filterRecipes, getRecipes, sortBy } from "@/data/storeRecipes"
+import { filterRecipes, getRecipes, sortBy } from "@/data/recipeService"
 import Filters from "@/components/home/Filters"
 import SelectedFilters from "@/components/home/SelectedFilters"
 import Sorting from "@/components/home/Sorting"
 import RecipeCard from "@/components/RecipeCard"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
-// import { resetRecipesToSeed } from "@/data/storeRecipes"
+// import { resetRecipesToSeed } from "@/data/recipeService"
 
 export default function Home(): JSX.Element {
   const allRecipes: Recipe[] = getRecipes()

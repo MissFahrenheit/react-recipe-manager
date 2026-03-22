@@ -1,5 +1,5 @@
 import type { JSX } from "react"
-import { getAllUniqueTags } from "@/data/storeRecipes"
+import { getAllUniqueTags } from "@/data/recipeService"
 import {
   Combobox,
   ComboboxChip,

@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 import type { FilterValues } from "@/types"
-import { getAllCuisines } from "@/data/storeRecipes"
+import { getAllCuisines } from "@/data/recipeService"
 import {
   Select,
   SelectContent,

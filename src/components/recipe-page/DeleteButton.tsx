@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 import { useNavigate } from "react-router-dom"
-import { deleteRecipe } from "@/data/storeRecipes"
+import { deleteRecipe } from "@/data/recipeService"
 import {
   Dialog,
   DialogClose,
