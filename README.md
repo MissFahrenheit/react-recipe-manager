@@ -21,12 +21,8 @@ Then open [http://localhost:3000](http://localhost:3000).
 ---
 
 ## Screenshots
-
-<img width="405" height="906" alt="mobile-recipe_page" src="https://github.com/user-attachments/assets/ae51fe03-4cf4-47b8-8a63-aaf68a31e8e9" />
-<img width="357" height="738" alt="mobile-home" src="https://github.com/user-attachments/assets/7f96a12b-99aa-43ae-9811-0960362810e7" />
-<img width="358" height="738" alt="mobile-home-with_filters_selected" src="https://github.com/user-attachments/assets/8099a75c-d6b6-4765-8c09-d13e40b2ed79" />
-<img width="358" height="738" alt="mobile-home-filters_open" src="https://github.com/user-attachments/assets/81e99ae3-1d7c-4262-962d-955fa8273650" />
-<img width="358" height="739" alt="mobile-add_recipe" src="https://github.com/user-attachments/assets/ad7b8836-058c-4bd2-8dae-9a27fddb6187" />
+<img width="1187" height="776" alt="mobile-screenshots-1" src="https://github.com/user-attachments/assets/f5074a76-48ae-4457-b32c-aca2a4b2e8bd" />
+<img width="804" height="776" alt="mobile-screenshots-2" src="https://github.com/user-attachments/assets/b25b54e5-b6db-4871-9b91-0d272e75a2f8" />
 <img width="1254" height="737" alt="desktop-recipe_page" src="https://github.com/user-attachments/assets/726840d6-3be4-430b-9def-d36122db50f0" />
 <img width="1256" height="737" alt="desktop-home" src="https://github.com/user-attachments/assets/4288f42b-078a-4288-a455-38f6ac9985b4" />
 <img width="1257" height="736" alt="desktop-edit_recipe" src="https://github.com/user-attachments/assets/8aa79836-355c-4a23-9909-1b4b77fd88b7" />
