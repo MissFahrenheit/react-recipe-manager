@@ -11,7 +11,8 @@ export const seedRecipes: Recipe[] = [
     prepTime: 10,
     cookTime: 15,
     servings: 4,
-    image: "https://images.unsplash.com/photo-1612874742237-6526221588e3",
+    image:
+      "https://res.cloudinary.com/dwiqiojeb/image/upload/v1774169250/je3ywcs98wcp2qs1gicn.jpg",
     tags: ["Pasta", "Roman", "Comfort Food", "Quick"],
     ingredients: [
       {
@@ -65,7 +66,8 @@ export const seedRecipes: Recipe[] = [
     prepTime: 10,
     cookTime: 20,
     servings: 6,
-    image: "https://images.unsplash.com/photo-1543339494-b4cd4f7ba686",
+    image:
+      "https://res.cloudinary.com/dwiqiojeb/image/upload/v1774169367/httpt8wijdzvntfxkjft.jpg",
     tags: ["Comfort Food", "Pasta", "Cheese", "Family Favorite"],
     ingredients: [
       {
@@ -148,7 +150,8 @@ export const seedRecipes: Recipe[] = [
     prepTime: 20,
     cookTime: 30,
     servings: 4,
-    image: "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8",
+    image:
+      "https://res.cloudinary.com/dwiqiojeb/image/upload/v1774169420/xcbinl0fyivlanzytkbo.jpg",
     tags: [
       "Chicken",
       "Cheese",

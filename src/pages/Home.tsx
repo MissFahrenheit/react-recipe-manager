@@ -13,6 +13,7 @@ import Sorting from "@/components/home/Sorting"
 import RecipeCard from "@/components/RecipeCard"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react"
+// import { resetRecipesToSeed } from "@/data/storeRecipes"
 
 export default function Home(): JSX.Element {
   const allRecipes: Recipe[] = getRecipes()
@@ -82,7 +83,7 @@ export default function Home(): JSX.Element {
   return (
     <>
       <div className="my-3 px-5">
-        {/*<Button variant="outline" onClick={handleResetClick}>
+        {/*<Button variant="outline" onClick={() => resetRecipesToSeed()}>
           Reset recipes
         </Button>*/}
         <div className="flex w-full justify-between gap-3">
