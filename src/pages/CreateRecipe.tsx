@@ -14,13 +14,16 @@ import InstructionsSection from "@/components/recipe-form/InstructionsSection"
 import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
+  const navigate = useNavigate()
+  const DEFAULT_IMAGE = "/default_recipe_image.jpg"
+
   const [recipeTags, setRecipeTags] = useState<string[]>([])
   const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([])
   const [recipeInstructions, setRecipeInstructions] = useState<string[]>([""])
   const [imageFile, setImageFile] = useState<File | null>(null)
-
   const [recipeForm, setRecipeForm] = useState<Partial<Recipe>>({
     name: "",
     cuisine: "",
@@ -31,21 +34,15 @@ export default function Recipe(): JSX.Element {
     servings: 0,
     notes: "",
   })
-
   const [instructionsError, setInstructionsError] = useState<boolean>(false)
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
-
-  const navigate = useNavigate()
-  const DEFAULT_IMAGE = "/default_recipe_image.jpg"
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   function updateRecipeForm(field: keyof Recipe, value: unknown): void {
     setRecipeForm((prev) => ({ ...prev, [field]: value }))
   }
 
   async function createRecipe(): Promise<void> {
-    const imageSrc = imageFile ? await uploadFile(imageFile) : DEFAULT_IMAGE
-    const newRecipeId = uuidv4()
-
     if (!recipeIngredients.length) {
       setIngredientsError(true)
       return
@@ -57,19 +54,26 @@ export default function Recipe(): JSX.Element {
       return
     }
 
-    const recipe = {
-      id: newRecipeId,
-      ...recipeForm,
-      image: imageSrc,
-      tags: recipeTags,
-      ingredients: recipeIngredients,
-      instructions: filledInstructions,
-      isFavorite: false,
-      createdAt: new Date(),
-    } as Recipe
+    setIsSubmitting(true)
+    try {
+      const imageSrc = imageFile ? await uploadFile(imageFile) : DEFAULT_IMAGE
+      const newRecipeId = uuidv4()
 
-    addRecipe(recipe)
-    navigate(`/recipe/${newRecipeId}`)
+      const recipe = {
+        id: newRecipeId,
+        ...recipeForm,
+        image: imageSrc,
+        tags: recipeTags,
+        ingredients: recipeIngredients,
+        instructions: filledInstructions,
+        isFavorite: false,
+        createdAt: new Date(),
+      } as Recipe
+      addRecipe(recipe)
+      navigate(`/recipe/${newRecipeId}`)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   function handleIngredientsUpdate(ingredients: Ingredient[]): void {
@@ -94,38 +98,45 @@ export default function Recipe(): JSX.Element {
             createRecipe()
           }}
         >
-          <BasicInfoSection
-            recipeForm={recipeForm}
-            onChange={updateRecipeForm}
-          />
-
-          <Separator />
-          <ImageSection onImageChange={setImageFile} />
-          <Separator />
-
-          <IngredientsSection
-            recipeIngredients={recipeIngredients}
-            ingredientsError={ingredientsError}
-            onUpdateIngredients={handleIngredientsUpdate}
-          />
-          <div>
-            <InstructionsSection
-              recipeInstructions={recipeInstructions}
-              instructionsError={instructionsError}
-              onUpdateInstructions={handleInstructionsUpdate}
+          <fieldset disabled={isSubmitting} className="contents">
+            <BasicInfoSection
+              recipeForm={recipeForm}
+              onChange={updateRecipeForm}
             />
 
-            <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
-          </div>
-          <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
+            <Separator />
+            <ImageSection onImageChange={setImageFile} />
+            <Separator />
 
-          <Button
-            type="submit"
-            size="lg"
-            className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
-          >
-            Create recipe
-          </Button>
+            <IngredientsSection
+              recipeIngredients={recipeIngredients}
+              ingredientsError={ingredientsError}
+              onUpdateIngredients={handleIngredientsUpdate}
+            />
+            <div>
+              <InstructionsSection
+                recipeInstructions={recipeInstructions}
+                instructionsError={instructionsError}
+                onUpdateInstructions={handleInstructionsUpdate}
+              />
+
+              <NotesSection
+                recipeForm={recipeForm}
+                onChange={updateRecipeForm}
+              />
+            </div>
+            <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
+
+            <Button
+              type="submit"
+              size="lg"
+              className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Spinner data-icon="inline-start" />}
+              Create recipe
+            </Button>
+          </fieldset>
         </form>
       </div>
       <Footer />

@@ -11,6 +11,7 @@ import NotesSection from "@/components/recipe-form/NotesSection"
 import TagsSection from "@/components/recipe-form/TagsSection"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
   const { recipeId } = useParams()
@@ -28,13 +29,14 @@ export default function Recipe(): JSX.Element {
   const [recipeInstructions, setRecipeInstructions] = useState<string[]>(
     recipe?.instructions ?? []
   )
-
   const [instructionsError, setInstructionsError] = useState<boolean>(false)
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
   const [imageFile, setImageFile] = useState<File | null>(null)
   // @TODO: add image update functionality
   // perhaps change createForm to upload files before form submission
   // and use the same component
+
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
   const recipeExists: boolean = recipe !== undefined
   useEffect(() => {
@@ -59,18 +61,34 @@ export default function Recipe(): JSX.Element {
   }
 
   function updateRecipe() {
-    console.log({ imageFile })
-    const updatedRecipe: Recipe = {
-      id: recipeId,
-      ...recipeForm,
-      tags: recipeTags,
-      instructions: recipeInstructions,
-      ingredients: recipeIngredients,
-    } as Recipe
+    if (!recipeIngredients.length) {
+      setIngredientsError(true)
+      return
+    }
 
-    storeUpdatedRecipe(recipeId ?? "", updatedRecipe)
+    const filledInstructions = recipeInstructions.filter((s) => s.trim() !== "")
+    if (!filledInstructions.length) {
+      setInstructionsError(true)
+      return
+    }
 
-    navigate(`/recipe/${recipeId}`)
+    setIsSubmitting(true)
+    try {
+      console.log({ imageFile })
+      const updatedRecipe: Recipe = {
+        id: recipeId,
+        ...recipeForm,
+        tags: recipeTags,
+        instructions: filledInstructions,
+        ingredients: recipeIngredients,
+      } as Recipe
+
+      storeUpdatedRecipe(recipeId ?? "", updatedRecipe)
+
+      navigate(`/recipe/${recipeId}`)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -84,35 +102,42 @@ export default function Recipe(): JSX.Element {
           updateRecipe()
         }}
       >
-        <BasicInfoSection recipeForm={recipeForm} onChange={updateRecipeForm} />
-
-        <Separator />
-        <ImageSection onImageChange={setImageFile} />
-        <Separator />
-
-        <IngredientsSection
-          recipeIngredients={recipeIngredients}
-          ingredientsError={ingredientsError}
-          onUpdateIngredients={handleIngredientsUpdate}
-        />
-        <div>
-          <InstructionsSection
-            recipeInstructions={recipeInstructions}
-            instructionsError={instructionsError}
-            onUpdateInstructions={handleInstructionsUpdate}
+        <fieldset disabled={isSubmitting} className="contents">
+          <BasicInfoSection
+            recipeForm={recipeForm}
+            onChange={updateRecipeForm}
           />
-          <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
-        </div>
 
-        <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
+          <Separator />
+          <ImageSection onImageChange={setImageFile} />
+          <Separator />
 
-        <Button
-          type="submit"
-          size="lg"
-          className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
-        >
-          Update recipe
-        </Button>
+          <IngredientsSection
+            recipeIngredients={recipeIngredients}
+            ingredientsError={ingredientsError}
+            onUpdateIngredients={handleIngredientsUpdate}
+          />
+          <div>
+            <InstructionsSection
+              recipeInstructions={recipeInstructions}
+              instructionsError={instructionsError}
+              onUpdateInstructions={handleInstructionsUpdate}
+            />
+            <NotesSection recipeForm={recipeForm} onChange={updateRecipeForm} />
+          </div>
+
+          <TagsSection recipeTags={recipeTags} onTagsUpdate={setRecipeTags} />
+
+          <Button
+            type="submit"
+            size="lg"
+            className="mx-auto mt-5 w-full rounded-full bg-red-600 hover:bg-red-500 md:w-1/2"
+            disabled={isSubmitting}
+          >
+            {isSubmitting && <Spinner data-icon="inline-start" />}
+            Update recipe
+          </Button>
+        </fieldset>
       </form>
     </div>
   )
