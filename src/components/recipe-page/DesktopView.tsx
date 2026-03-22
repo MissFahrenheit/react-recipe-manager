@@ -4,6 +4,7 @@ import { formatDate } from "@/lib/helpers"
 import Footer from "@/components/Footer"
 import AddToFavorites from "@/components/AddToFavorites"
 import DifficultyBadge from "@/components/DifficultyBadge"
+import RecipeImage from "@/components/RecipeImage"
 import BasicInfoSection from "@/components/recipe-page/BasicInfoSection"
 import InstructionsSection from "@/components/recipe-page/InstructionsSection"
 import TagsSection from "@/components/recipe-page/TagsSection"
@@ -77,11 +78,9 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="37%">
-          <img
-            src={recipe.image}
-            alt={recipe.name}
-            className="aspect-video w-full object-cover"
-          />
+          <div className="relative aspect-video w-full">
+            <RecipeImage recipeImg={recipe.image} recipeName={recipe.name} />
+          </div>
           <div className="p-6">
             {recipe.ingredients && (
               <>

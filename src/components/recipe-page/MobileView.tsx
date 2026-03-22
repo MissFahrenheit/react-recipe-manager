@@ -2,14 +2,15 @@ import type { Recipe } from "@/types"
 import type { JSX } from "react"
 import { formatDate } from "@/lib/helpers"
 import Footer from "@/components/Footer"
+import AddToFavorites from "@/components/AddToFavorites"
+import DifficultyBadge from "@/components/DifficultyBadge"
+import RecipeImage from "@/components/RecipeImage"
 import BasicInfoSection from "@/components/recipe-page/BasicInfoSection"
 import IngredientsSection from "@/components/recipe-page/IngredientsSection"
 import InstructionsSection from "@/components/recipe-page/InstructionsSection"
 import TagsSection from "@/components/recipe-page/TagsSection"
 import EditButton from "@/components/recipe-page/EditButton"
 import DeleteButton from "@/components/recipe-page/DeleteButton"
-import AddToFavorites from "@/components/AddToFavorites"
-import DifficultyBadge from "@/components/DifficultyBadge"
 import { Separator } from "@/components/ui/separator"
 
 type MobileViewProps = {
@@ -20,10 +21,12 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
   return (
     <article>
       <div className="relative">
-        <img src={recipe.image} alt={recipe.name} />
+        <div className="relative aspect-video w-full">
+          <RecipeImage recipeImg={recipe.image} recipeName={recipe.name} />
+        </div>
         <AddToFavorites
           recipe={recipe}
-          cssClass="absolute top-4 right-5 z-30 h-10 w-10 rounded-full bg-yellow-100 hover:bg-yellow-100 aria-pressed:bg-yellow-100 data-[state=on]:bg-yellow-200"
+          cssClass="absolute top-4 right-5 z-40 h-10 w-10 rounded-full bg-white hover:bg-white aria-pressed:bg-white data-[state=on]:bg-white border-0 shadow-md hover:scale-110 transition-transform"
         />
         <DifficultyBadge
           difficulty={recipe.difficulty}
