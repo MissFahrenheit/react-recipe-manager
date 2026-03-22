@@ -24,9 +24,13 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
       <div className="relative">
         <Link
           to={`recipe/${recipe.id}`}
-          className="relative block aspect-video w-full"
+          className="relative block aspect-video w-full overflow-hidden"
         >
-          <RecipeImage recipeImg={recipe.image} recipeName={recipe.name} />
+          <RecipeImage
+            recipeImg={recipe.image}
+            recipeName={recipe.name}
+            cssClass="hover:scale-105 transition-transform"
+          />
         </Link>
         <AddToFavorites
           recipe={recipe}

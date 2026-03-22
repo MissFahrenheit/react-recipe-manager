@@ -1,15 +1,18 @@
 import type { JSX } from "react"
 import { useState } from "react"
+import { cn } from "@/lib/utils"
 import { Skeleton } from "./ui/skeleton"
 
 type RecipeImageProps = {
   recipeImg: string
   recipeName: string
+  cssClass?: string
 }
 
 export default function RecipeImage({
   recipeImg,
   recipeName,
+  cssClass,
 }: RecipeImageProps): JSX.Element {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [blurLoaded, setBlurLoaded] = useState(false)
@@ -20,7 +23,10 @@ export default function RecipeImage({
         src={recipeImg}
         alt={recipeName}
         onLoad={() => setImageLoaded(true)}
-        className="relative z-20 aspect-video w-full object-cover"
+        className={cn(
+          "relative z-20 aspect-video w-full object-cover",
+          cssClass
+        )}
       />
       {!imageLoaded && (
         <img
