@@ -24,8 +24,6 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
   const [blurLoaded, setBlurLoaded] = useState(false)
   const blurUrl = recipe.image.replace("/upload/", "/upload/w_50,e_blur:1000/")
 
-  console.log({ imageLoaded })
-
   return (
     <Card className="w-full max-w-120 pt-0">
       <div className="relative">
