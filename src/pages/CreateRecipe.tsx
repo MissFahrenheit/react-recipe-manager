@@ -3,19 +3,18 @@ import type { Recipe, Ingredient } from "@/types"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { v4 as uuidv4 } from "uuid"
-import uploadFile from "@/lib/uploadFile"
 import { cn } from "@/lib/utils"
 import { RED_BUTTON_CSS_CLASSES } from "@/lib/helpers"
+import { markPublicIdAsUsed } from "@/lib/imageUtils"
 import { addRecipe } from "@/data/storeRecipes"
-import IngredientsSection from "@/components/recipe-form/IngredientsSection"
 import BasicInfoSection from "@/components/recipe-form/BasicInfoSection"
 import ImageSection from "@/components/recipe-form/ImageSection"
+import IngredientsSection from "@/components/recipe-form/IngredientsSection"
+import InstructionsSection from "@/components/recipe-form/InstructionsSection"
 import NotesSection from "@/components/recipe-form/NotesSection"
 import TagsSection from "@/components/recipe-form/TagsSection"
-import InstructionsSection from "@/components/recipe-form/InstructionsSection"
 import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
@@ -25,7 +24,6 @@ export default function Recipe(): JSX.Element {
   const [recipeTags, setRecipeTags] = useState<string[]>([])
   const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([])
   const [recipeInstructions, setRecipeInstructions] = useState<string[]>([""])
-  const [imageFile, setImageFile] = useState<File | null>(null)
   const [recipeForm, setRecipeForm] = useState<Partial<Recipe>>({
     name: "",
     cuisine: "",
@@ -39,12 +37,19 @@ export default function Recipe(): JSX.Element {
   const [instructionsError, setInstructionsError] = useState<boolean>(false)
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [imageUrl, setImageUrl] = useState<string>("")
+  const [imagePublicId, setImagePublicId] = useState<string>("")
+
+  function handleUploadComplete(url: string, publicId: string): void {
+    setImageUrl(url)
+    setImagePublicId(publicId)
+  }
 
   function updateRecipeForm(field: keyof Recipe, value: unknown): void {
     setRecipeForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  async function createRecipe(): Promise<void> {
+  function createRecipe(): void {
     if (!recipeIngredients.length) {
       setIngredientsError(true)
       return
@@ -58,9 +63,8 @@ export default function Recipe(): JSX.Element {
 
     setIsSubmitting(true)
     try {
-      const imageSrc = imageFile ? await uploadFile(imageFile) : DEFAULT_IMAGE
+      const imageSrc = imageUrl || DEFAULT_IMAGE
       const newRecipeId = uuidv4()
-
       const recipe = {
         id: newRecipeId,
         ...recipeForm,
@@ -71,7 +75,13 @@ export default function Recipe(): JSX.Element {
         isFavorite: false,
         createdAt: new Date(),
       } as Recipe
+
       addRecipe(recipe)
+
+      if (imagePublicId) {
+        markPublicIdAsUsed(imagePublicId)
+      }
+
       navigate(`/recipe/${newRecipeId}`)
     } finally {
       setIsSubmitting(false)
@@ -106,9 +116,10 @@ export default function Recipe(): JSX.Element {
               onChange={updateRecipeForm}
             />
 
-            <Separator />
-            <ImageSection onImageChange={setImageFile} />
-            <Separator />
+            <ImageSection
+              recipeImage={imageUrl}
+              onUploadComplete={handleUploadComplete}
+            />
 
             <IngredientsSection
               recipeIngredients={recipeIngredients}

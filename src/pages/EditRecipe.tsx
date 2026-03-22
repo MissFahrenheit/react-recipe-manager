@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { RED_BUTTON_CSS_CLASSES } from "@/lib/helpers"
+import { markPublicIdAsUsed } from "@/lib/imageUtils"
 import { getRecipeById, storeUpdatedRecipe } from "@/data/storeRecipes"
 import BasicInfoSection from "@/components/recipe-form/BasicInfoSection"
 import ImageSection from "@/components/recipe-form/ImageSection"
@@ -12,12 +13,12 @@ import InstructionsSection from "@/components/recipe-form/InstructionsSection"
 import NotesSection from "@/components/recipe-form/NotesSection"
 import TagsSection from "@/components/recipe-form/TagsSection"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
   const { recipeId } = useParams()
   const navigate = useNavigate()
+  const DEFAULT_IMAGE = "/images/default_recipe_image_800.jpg"
 
   const recipe: Recipe | undefined = recipeId
     ? getRecipeById(recipeId)
@@ -33,12 +34,13 @@ export default function Recipe(): JSX.Element {
   )
   const [instructionsError, setInstructionsError] = useState<boolean>(false)
   const [ingredientsError, setIngredientsError] = useState<boolean>(false)
-  const [imageFile, setImageFile] = useState<File | null>(null)
-  // @TODO: add image update functionality
-  // perhaps change createForm to upload files before form submission
-  // and use the same component
-
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [imagePublicId, setImagePublicId] = useState<string>("")
+
+  const isRecipeImageDefault = recipe?.image.includes(DEFAULT_IMAGE)
+  const [imageUrl, setImageUrl] = useState<string>(
+    recipe?.image && !isRecipeImageDefault ? recipe?.image : ""
+  )
 
   const recipeExists: boolean = recipe !== undefined
   useEffect(() => {
@@ -47,6 +49,11 @@ export default function Recipe(): JSX.Element {
     }
   }, [recipeExists, navigate])
   // if (!recipe) return <Error404 /> @TODO add this to notes
+
+  function handleUploadComplete(url: string, publicId: string): void {
+    setImageUrl(url)
+    setImagePublicId(publicId)
+  }
 
   function handleIngredientsUpdate(ingredients: Ingredient[]): void {
     setIngredientsError(false)
@@ -76,16 +83,21 @@ export default function Recipe(): JSX.Element {
 
     setIsSubmitting(true)
     try {
-      console.log({ imageFile })
+      const imageSrc = imageUrl || DEFAULT_IMAGE
       const updatedRecipe: Recipe = {
         id: recipeId,
         ...recipeForm,
+        image: imageSrc,
         tags: recipeTags,
         instructions: filledInstructions,
         ingredients: recipeIngredients,
       } as Recipe
 
       storeUpdatedRecipe(recipeId ?? "", updatedRecipe)
+
+      if (imagePublicId) {
+        markPublicIdAsUsed(imagePublicId)
+      }
 
       navigate(`/recipe/${recipeId}`)
     } finally {
@@ -110,9 +122,10 @@ export default function Recipe(): JSX.Element {
             onChange={updateRecipeForm}
           />
 
-          <Separator />
-          <ImageSection onImageChange={setImageFile} />
-          <Separator />
+          <ImageSection
+            recipeImage={imageUrl}
+            onUploadComplete={handleUploadComplete}
+          />
 
           <IngredientsSection
             recipeIngredients={recipeIngredients}
