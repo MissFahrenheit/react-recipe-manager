@@ -22,7 +22,7 @@ export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
     <article>
       <div className="relative">
         <div className="relative aspect-video w-full">
-          <RecipeImage recipeImg={recipe.image} recipeName={recipe.name} />
+          <RecipeImage src={recipe.image} alt={recipe.name} variant="page" />
         </div>
         <AddToFavorites
           recipe={recipe}

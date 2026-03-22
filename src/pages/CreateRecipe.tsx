@@ -20,7 +20,7 @@ import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
   const navigate = useNavigate()
-  const DEFAULT_IMAGE = "/default_recipe_image.jpg"
+  const DEFAULT_IMAGE = "/images/default_recipe_image_800.jpg"
 
   const [recipeTags, setRecipeTags] = useState<string[]>([])
   const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([])

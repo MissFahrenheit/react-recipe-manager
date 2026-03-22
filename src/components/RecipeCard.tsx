@@ -1,7 +1,6 @@
 import type { JSX } from "react"
 import type { Recipe } from "@/types"
 import { Link } from "react-router-dom"
-import { Separator } from "./ui/separator"
 import {
   Card,
   CardAction,
@@ -9,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Clock, Utensils } from "lucide-react"
+import { Clock, Users } from "lucide-react"
 import AddToFavorites from "./AddToFavorites"
 import DifficultyBadge from "./DifficultyBadge"
 import RecipeImage from "./RecipeImage"
@@ -21,20 +20,16 @@ type RecipeCardProps = {
 export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
   return (
     <Card className="w-full max-w-120 pt-0">
-      <div className="relative">
+      <div className="group relative">
         <Link
           to={`recipe/${recipe.id}`}
           className="relative block aspect-video w-full overflow-hidden"
         >
-          <RecipeImage
-            recipeImg={recipe.image}
-            recipeName={recipe.name}
-            cssClass="hover:scale-105 transition-transform"
-          />
+          <RecipeImage src={recipe.image} alt={recipe.name} variant="card" />
         </Link>
         <AddToFavorites
           recipe={recipe}
-          cssClass="absolute top-4 right-5 z-40 h-10 w-10 rounded-full bg-white hover:bg-white aria-pressed:bg-white data-[state=on]:bg-white border-0 shadow-md hover:scale-110 transition-transform"
+          cssClass="absolute top-4 right-5 z-40 h-10 w-10 rounded-full bg-white  aria-pressed:bg-white data-[state=on]:bg-white data-[state=on]:hover:bg-muted border-0 shadow-md  transition-transform hover:bg-muted"
         />
       </div>
       <CardHeader>
@@ -47,14 +42,14 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
           </Link>
         </CardTitle>
         <CardDescription>{recipe.description}</CardDescription>
-        <div className="mt-2 flex items-center gap-3 text-sm text-gray-400">
+        <div className="mt-2 flex items-center gap-4 text-sm text-gray-400">
           <div className="flex items-center gap-1">
             <Clock className="size-4" />
             <span>{recipe.prepTime + recipe.cookTime}'</span>
           </div>
-          <Separator orientation="vertical" />
+          {/*<Separator orientation="vertical" />*/}
           <div className="flex items-center gap-1">
-            <Utensils className="size-4" />
+            <Users className="size-4" />
             <span>{recipe.servings}</span>
           </div>
         </div>

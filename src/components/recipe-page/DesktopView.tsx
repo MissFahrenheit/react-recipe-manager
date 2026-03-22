@@ -79,7 +79,7 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="37%">
           <div className="relative aspect-video w-full">
-            <RecipeImage recipeImg={recipe.image} recipeName={recipe.name} />
+            <RecipeImage src={recipe.image} alt={recipe.name} variant="page" />
           </div>
           <div className="p-6">
             {recipe.ingredients && (

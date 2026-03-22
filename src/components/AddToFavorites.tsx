@@ -4,6 +4,7 @@ import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { storeUpdatedRecipe } from "@/data/storeRecipes"
 import { Toggle } from "./ui/toggle"
+import { toast } from "sonner"
 import { Heart } from "lucide-react"
 
 type AddToFavoritesProps = {
@@ -21,6 +22,10 @@ export default function AddToFavorites({
     const updatedRecipe = { ...recipe, isFavorite: !favorite }
     storeUpdatedRecipe(recipe.id, updatedRecipe)
     setFavorite((prevState: boolean) => !prevState)
+    toast.success(
+      favorite ? "Recipe removed from favorites" : "Recipe added to favorites",
+      { position: "top-center" }
+    )
   }
 
   return (
