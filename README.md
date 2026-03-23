@@ -48,16 +48,34 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ## UX Decisions
 
-*Content TBA.*
+**Recipe card content** — The card shows image, title, description, total time, servings, and the favorite toggle. Tags, separate prep/cook times, ingredient counts, and step counts are intentionally omitted. These add visual clutter without meaningfully helping someone decide whether a recipe interests them.
+
+**Selected filters always visible** — Filters live inside a sheet to save space, but the currently active filters are always shown inline above the results. On mobile this costs some vertical space, but knowingat a glance what filters are applied and being able to remove them one by one is worth it, especially since the filter panel is hidden by default.
+
+**Filters in a sheet instead of a drawer** — Drawers are generally nicer on mobile since they can be dismissed with a swipe. However, the prep and cook time sliders created a drag conflict with the drawer's swipe-to-close gesture, making the experience unreliable. A sheet avoids this entirely.
+
+**Recipe card is not fully clickable** — Only the image and title navigate to the recipe. Since the favorite button performs a different action, making the entire card a link would create a confusing interaction where part of the card does one thing and the rest does another.
+
+**Collapsible ingredients on mobile** — Once you've gathered your ingredients, that section is no longer useful. Being able to collapse it frees up screen space for the instructions.
+
+**Different layouts for mobile and desktop on the recipe page** — On mobile, a vertical layout is the only sensible option. On desktop, placing the ingredient list and image on the right panel and the main recipe content on the left makes better use of horizontal space and creates a cleaner information hierarchy.
+
+**General UI scope** — There are many UI improvements I would have liked to implement, some of which are noted in Future Improvements. For this assignment, I focused on what made the most sense within a reasonable timeframe.
 
 
 ---
 
 ## Challenges
 
-The main challenge was scope management, i.e. deciding which features to implement within a reasonable timeframe without falling into perfectionism. This type of product can have an infinite amount of features, so drawing the line between "good enough for now" and "worth doing properly" required a fair amount of prioritisation.
+**Scope management** — The main challenge was deciding which features to implement within a reasonable timeframe without falling into perfectionism. This type of product can have an infinite amount of features, so drawing the line between "good enough for now" and "worth doing properly" required a fair amount of prioritisation.
 
-One technical decision worth mentioning was the image upload flow. Uploading on form submission is simpler and that's what I implemented at first, but uploading immediately on file selection gives better UX (progress feedback, instant preview). The tradeoff is orphaned images, which led to the localStorage tracking approach documented in the Future Improvements section.
+**Image upload flow** — Uploading on form submission is simpler and that's what I implemented at first, but uploading immediately on file selection gives better UX (progress feedback, instant preview). The tradeoff is orphaned images, which led to the localStorage tracking approach documented in the Future Improvements section.
+
+**Form architecture** — React 19's new `action`-based form API was considered but not used. The create and edit forms share the same section components, and some parts have custom validation logic that doesn't map cleanly to the native form model (requiring at least one ingredient, removing empty steps before submission, multi-field ingredient entries). A controlled state approach with `onSubmit` gave more predictable behaviour across both forms.
+
+**Component conflicts inside the filter sheet** — Some filter components didn't behave as expected when rendered inside a Radix sheet. The tags combobox in particular wouldn't fire selection events until `modal={false}` was added to the sheet, which disables Radix's default focus trapping. This took some debugging to identify since the issue wasn't obvious from the component code alone.
+
+**404 redirect constraints** — Redirecting to a 404 page using `navigate()` directly in the render body causes React to complain about side effects during rendering. The correct approach is to wrap the navigation in a `useEffect`, even though it results in a brief render before the redirect fires.
 
 
 ---
