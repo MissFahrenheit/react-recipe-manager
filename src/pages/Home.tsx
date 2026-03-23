@@ -12,6 +12,7 @@ import {
   sortBy,
   searchRecipesByTitle,
 } from "@/data/recipeService"
+import { usePageTitle } from "@/lib/usePageTitle"
 import SearchBar from "@/components/SearchBar"
 import Filters from "@/components/home/Filters"
 import SelectedFilters from "@/components/home/SelectedFilters"
@@ -22,6 +23,8 @@ import { Trash2 } from "lucide-react"
 // import { resetRecipesToSeed } from "@/data/recipeService"
 
 export default function Home(): JSX.Element {
+  usePageTitle("Home")
+
   const allRecipes: Recipe[] = getRecipes()
   const allRecipesSortedByNewestFirst: Recipe[] = sortBy(
     allRecipes,

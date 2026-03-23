@@ -1,9 +1,10 @@
-import type { Recipe } from "@/types"
 import type { JSX } from "react"
+import type { Recipe } from "@/types"
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getRecipeById } from "@/data/recipeService"
 import { useIsMobile } from "@/lib/useIsMobile"
+import { usePageTitle } from "@/lib/usePageTitle"
 import MobileView from "@/components/recipe-page/MobileView"
 import DesktopView from "@/components/recipe-page/DesktopView"
 
@@ -22,6 +23,8 @@ export default function Recipe(): JSX.Element {
       navigate("/404")
     }
   }, [recipeExists, navigate])
+
+  usePageTitle(recipe?.name ?? "")
 
   return (
     <>

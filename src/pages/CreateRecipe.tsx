@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid"
 import { cn } from "@/lib/utils"
 import { RED_BUTTON_CSS_CLASSES } from "@/lib/helpers"
 import { markPublicIdAsUsed } from "@/lib/imageUtils"
+import { usePageTitle } from "@/lib/usePageTitle"
 import { addRecipe } from "@/data/recipeService"
 import BasicInfoSection from "@/components/recipe-form/BasicInfoSection"
 import ImageSection from "@/components/recipe-form/ImageSection"
@@ -18,6 +19,7 @@ import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
 
 export default function Recipe(): JSX.Element {
+  usePageTitle("Add a new recipe")
   const navigate = useNavigate()
   const DEFAULT_IMAGE = "/images/default_recipe_image_800.jpg"
 
