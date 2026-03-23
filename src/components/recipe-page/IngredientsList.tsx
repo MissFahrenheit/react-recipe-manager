@@ -20,7 +20,10 @@ export default function IngredientsList({
             orientation="horizontal"
             className="group has-data-checked:text-gray-400 has-data-checked:line-through has-data-checked:dark:text-white/20"
           >
-            <Checkbox id={`ingredient-${idx}`} className="bg-white" />
+            <Checkbox
+              id={`ingredient-${idx}`}
+              className="data-checked:border-gray-300 data-checked:bg-transparent data-checked:text-neutral-400 dark:data-checked:border-neutral-700 dark:data-checked:bg-transparent"
+            />
             <Label htmlFor={`ingredient-${idx}`}>
               <span className="font-semibold">{ingredient.item}:</span>
               <span className="font-normal">
