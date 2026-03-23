@@ -34,7 +34,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 ## Tech Stack
 
 | Technology | Details |
-|---|---|---|
+|---|---|
 | React v19 | Required by assignment |
 | TypeScript v5.9 | Required by assignment |
 | Docker + nginx | Required by assignment, multi-stage build for a small production image |
