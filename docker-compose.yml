@@ -1,16 +1,9 @@
 services:
   recipe-box:
-    build: .
+    build:
+      context: .
+      args:
+        - VITE_CLOUDINARY_CLOUD_NAME=${VITE_CLOUDINARY_CLOUD_NAME}
+        - VITE_CLOUDINARY_UPLOAD_PRESET=${VITE_CLOUDINARY_UPLOAD_PRESET}
     ports:
       - "${PORT:-3000}:3000"
-```
-
-**.dockerignore**:
-```
-node_modules
-dist
-.env
-.env*.local
-.git
-.gitignore
-*.log

@@ -6,6 +6,13 @@ A React + TypeScript assignment of a personal recipe management mini-app.
 
 ## Quick Start
 
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in the values (sent separately):
+```bash
+cp .env.example .env
+```
+
 ### With Docker
 ```bash
 docker build -t recipe-box .
