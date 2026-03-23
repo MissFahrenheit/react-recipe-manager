@@ -51,8 +51,8 @@ export default function TagsSection({
   }
 
   return (
-    <section>
-      <h3 className="mb-4 text-xl font-semibold md:mb-0">Tags</h3>
+    <section aria-label="Tags" className="flex flex-col">
+      <h3 className="mb-1 text-xl font-semibold md:mb-0">Tags</h3>
 
       <Combobox
         multiple
@@ -63,7 +63,10 @@ export default function TagsSection({
       >
         <div className="mb-2 flex flex-col gap-3 sm:flex-row">
           <Field className="w-full sm:w-1/2">
-            <FieldLabel className="h-auto sm:h-5"></FieldLabel>
+            <FieldLabel
+              className="h-auto sm:h-5"
+              aria-hidden="true"
+            ></FieldLabel>
             <ComboboxInput placeholder="Select recipe tags" showClear />
           </Field>
 
@@ -81,7 +84,6 @@ export default function TagsSection({
                 onChange={(e) => setNewTag(e.target.value)}
                 onKeyDown={handleAddTag}
                 autoComplete="off"
-                aria-autocomplete="none"
               />
               <InputGroupAddon align="inline-end">
                 <InputGroupButton
@@ -90,7 +92,7 @@ export default function TagsSection({
                   size="icon-xs"
                   className="ml-auto"
                 >
-                  <Plus />
+                  <Plus aria-hidden="true" />
                   <span className="sr-only">Add</span>
                 </InputGroupButton>
               </InputGroupAddon>

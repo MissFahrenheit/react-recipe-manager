@@ -23,11 +23,11 @@ export default function TimeFilter({
   return (
     <div className="pb-3">
       <div className="mb-3 flex items-center justify-between gap-2">
-        <Label htmlFor="slider-time">{labelName}</Label>
+        <Label htmlFor={`slider-${type}`}>{labelName}</Label>
         <span className="text-sm text-muted-foreground">{value + " min"}</span>
       </div>
       <Slider
-        id="slider-time"
+        id={`slider-${type}`}
         defaultValue={[maxTimeOption]}
         max={maxTimeOption}
         step={5}

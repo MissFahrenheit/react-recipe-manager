@@ -17,6 +17,7 @@ export default function AddedIngredient({
 }: AddedIngredientProps): JSX.Element {
   return (
     <Item
+      role="listitem"
       variant="outline"
       className="rounded-full border-yellow-300/50 bg-yellow-50 py-1 dark:border-yellow-300/40 dark:bg-yellow-300/20"
     >
@@ -38,11 +39,11 @@ export default function AddedIngredient({
           size="icon-sm"
           variant="outline"
           className="group rounded-full"
-          aria-label="Remove ingredient"
+          aria-label={`Remove ${ingredient.item}`}
           type="button"
           onClick={() => removeIngredient(index)}
         >
-          <Trash2 className="group-hover:stroke-red-600" />
+          <Trash2 className="group-hover:stroke-red-600" aria-hidden="true" />
         </Button>
       </ItemActions>
     </Item>

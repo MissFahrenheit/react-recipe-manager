@@ -28,44 +28,48 @@ export default function ImageSection({
   )
   const [error, setError] = useState<string>("")
 
-  async function uploadToCloudinary(file: File): Promise<void> {
-    setIsUploading(true)
-    setUploadProgress(0)
-    setError("")
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      const file = acceptedFiles[0]
+      if (!file) return
+      setPreviewUrl(URL.createObjectURL(file))
 
-    const fd = new FormData()
-    fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-    fd.append("tags", "browser_upload")
-    fd.append("file", file)
+      async function uploadToCloudinary(file: File): Promise<void> {
+        setIsUploading(true)
+        setUploadProgress(0)
+        setError("")
 
-    try {
-      const { data } = await axios.post(UPLOAD_URL, fd, {
-        onUploadProgress: (progressEvent) => {
-          if (progressEvent.total) {
-            const percent = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            )
-            setUploadProgress(percent)
-          }
-        },
-      })
+        const fd = new FormData()
+        fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+        fd.append("tags", "browser_upload")
+        fd.append("file", file)
 
-      setPreviewUrl(data.secure_url)
-      addOrphanedPublicId(data.public_id)
-      onUploadComplete(data.secure_url, data.public_id)
-    } catch {
-      setError("Upload failed. Please try again.")
-    } finally {
-      setIsUploading(false)
-    }
-  }
+        try {
+          const { data } = await axios.post(UPLOAD_URL, fd, {
+            onUploadProgress: (progressEvent) => {
+              if (progressEvent.total) {
+                const percent = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                )
+                setUploadProgress(percent)
+              }
+            },
+          })
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
-    if (!file) return
-    setPreviewUrl(URL.createObjectURL(file))
-    uploadToCloudinary(file)
-  }, [])
+          setPreviewUrl(data.secure_url)
+          addOrphanedPublicId(data.public_id)
+          onUploadComplete(data.secure_url, data.public_id)
+        } catch {
+          setError("Upload failed. Please try again.")
+        } finally {
+          setIsUploading(false)
+        }
+      }
+
+      uploadToCloudinary(file)
+    },
+    [onUploadComplete]
+  )
 
   function handleRemove(): void {
     setPreviewUrl(null)
@@ -96,7 +100,11 @@ export default function ImageSection({
             />
 
             {isUploading && (
-              <div className="absolute inset-0 z-2 flex flex-col items-center justify-center rounded-lg bg-black/40">
+              <div
+                role="status"
+                aria-live="polite"
+                className="absolute inset-0 z-2 flex flex-col items-center justify-center rounded-lg bg-black/40"
+              >
                 <span className="mb-2 text-sm font-medium text-white">
                   Uploading... {uploadProgress}%
                 </span>
@@ -115,10 +123,11 @@ export default function ImageSection({
                   type="button"
                   variant="outline"
                   size="icon-sm"
+                  aria-label="Remove image"
                   className="absolute top-2 right-2 z-10 rounded-full bg-white dark:bg-neutral-600 dark:hover:bg-neutral-900"
                   onClick={handleRemove}
                 >
-                  <X />
+                  <X aria-hidden="true" />
                 </Button>
               </>
             )}
@@ -126,6 +135,8 @@ export default function ImageSection({
         ) : (
           <div
             {...getRootProps()}
+            role="button"
+            aria-label="Upload recipe image"
             className={`flex justify-center rounded-lg border border-dashed px-6 py-10 transition-colors ${
               isDragActive
                 ? "border-red-400 bg-red-50 dark:bg-red-500/10"
@@ -134,7 +145,11 @@ export default function ImageSection({
           >
             <input {...getInputProps()} />
             <div className="text-center">
-              <Image size="60" className="mx-auto text-gray-300" />
+              <Image
+                size="60"
+                className="mx-auto text-gray-300"
+                aria-hidden="true"
+              />
               {isDragActive ? (
                 <>
                   <div className="mt-4 text-xl font-semibold text-gray-300">

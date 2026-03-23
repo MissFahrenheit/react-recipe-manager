@@ -2,7 +2,6 @@ export type Difficulty = "Easy" | "Medium" | "Hard"
 export type SortDirection = "asc" | "desc"
 export type SortableField = "createdAt" | "difficulty" | "totalTime"
 export type DifficultyOption = "Any" | "Easy" | "Medium" | "Hard"
-export type SortingValue = `${SortableField}-${SortDirection}`
 
 export interface Ingredient {
   item: string

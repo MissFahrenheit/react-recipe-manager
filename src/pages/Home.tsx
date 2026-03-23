@@ -107,17 +107,27 @@ export default function Home(): JSX.Element {
           />
         )}
         {filtersSelected && recipes.length === 0 && (
-          <div className="flex h-30 flex-col items-center justify-center gap-3">
+          <div
+            role="status"
+            className="flex h-30 flex-col items-center justify-center gap-3"
+          >
             <span className="text-muted-foreground">
               No recipes found for the selected filters.
             </span>
-            <Button variant="outline" onClick={resetFilters}>
+            <Button
+              variant="outline"
+              onClick={resetFilters}
+              aria-label="Clear all filters"
+            >
               <Trash2 />
               Clear filters
             </Button>
           </div>
         )}
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div
+          className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
+          aria-label="Recipes"
+        >
           {recipeCards}
         </div>
       </div>

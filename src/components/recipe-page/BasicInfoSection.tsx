@@ -12,8 +12,11 @@ export default function BasicInfoSection({
 }: BasicInfoSectionProps): JSX.Element {
   return (
     <>
-      <div className="mt-3 mb-2 flex items-center gap-3 font-light text-gray-400">
-        <Clock size={16} />
+      <div
+        className="mt-3 mb-2 flex items-center gap-3 font-light text-gray-400"
+        aria-label="Cooking times"
+      >
+        <Clock size={16} aria-hidden="true" />
         <div className="flex items-center gap-3 text-sm font-light text-gray-400">
           <span>Prep: {recipe.prepTime}'</span>
           <Separator orientation="vertical" />
@@ -23,8 +26,11 @@ export default function BasicInfoSection({
         </div>
       </div>
 
-      <div className="mb-4 flex items-center gap-2 text-sm font-light text-gray-400">
-        <Utensils size={16} />
+      <div
+        className="mb-4 flex items-center gap-2 text-sm font-light text-gray-400"
+        aria-label="Servings"
+      >
+        <Utensils size={16} aria-hidden="true" />
         <span>Serves: {recipe.servings}</span>
       </div>
 

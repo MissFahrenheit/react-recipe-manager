@@ -23,13 +23,15 @@ export default function CuisineFilter({
   const cuisineOptions = getAllCuisines()
   return (
     <div className="w-full pb-2">
-      <Label className="mb-2">Cuisine</Label>
+      <Label htmlFor="cuisine-filter" className="mb-2">
+        Cuisine
+      </Label>
       <Select
         defaultValue=""
         value={cuisine}
         onValueChange={(val) => onChange("cuisine", val)}
       >
-        <SelectTrigger className="w-full">
+        <SelectTrigger id="cuisine-filter" className="w-full">
           <SelectValue placeholder="Select an option" />
         </SelectTrigger>
         <SelectContent position="item-aligned">

@@ -22,6 +22,8 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
     <Card className="w-full max-w-120 pt-0">
       <div className="group relative">
         <Link
+          aria-hidden="true"
+          tabIndex={-1}
           to={`recipe/${recipe.id}`}
           className="relative block aspect-video w-full overflow-hidden"
         >
@@ -43,12 +45,12 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
         </CardTitle>
         <CardDescription>{recipe.description}</CardDescription>
         <div className="mt-2 flex items-center gap-4 text-sm text-gray-400">
-          <div className="flex items-center gap-1">
-            <Clock className="size-4" />
+          <div className="flex items-center gap-1" aria-label="Total time">
+            <Clock className="size-4" aria-hidden="true" />
             <span>{recipe.prepTime + recipe.cookTime}'</span>
           </div>
-          <div className="flex items-center gap-1">
-            <Users className="size-4" />
+          <div className="flex items-center gap-1" aria-label="Servings">
+            <Users className="size-4" aria-hidden="true" />
             <span>{recipe.servings}</span>
           </div>
         </div>

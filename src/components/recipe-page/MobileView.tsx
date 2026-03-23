@@ -19,7 +19,7 @@ type MobileViewProps = {
 
 export default function MobileView({ recipe }: MobileViewProps): JSX.Element {
   return (
-    <article>
+    <article aria-label={recipe.name}>
       <div className="relative">
         <div className="relative aspect-video w-full">
           <RecipeImage src={recipe.image} alt={recipe.name} variant="page" />

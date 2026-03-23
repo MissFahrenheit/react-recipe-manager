@@ -31,7 +31,8 @@ export default function AddToFavorites({
   return (
     <Toggle
       onClick={toggleFavoriteRecipe}
-      aria-label="Add recipe to favorites"
+      aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
+      aria-pressed={favorite}
       size="lg"
       data-state={favorite ? "on" : "off"}
       variant="outline"

@@ -15,7 +15,7 @@ export default function IngredientsList({
   return (
     <>
       {recipeIngredients.map((ingredient: Ingredient, idx: number) => (
-        <div key={`ingredient-${idx}`}>
+        <div role="listitem" key={`ingredient-${idx}`}>
           <Field
             orientation="horizontal"
             className="group has-data-checked:text-gray-400 has-data-checked:line-through has-data-checked:dark:text-white/20"

@@ -14,9 +14,9 @@ export default function MainLayout(): JSX.Element {
         <main className="bg-neutral-50 dark:bg-neutral-800">
           <Outlet />
         </main>
-        <Toaster />
         {!isRecipePage && <Footer textAlign="left" />}
       </div>
+      <Toaster />
     </>
   )
 }

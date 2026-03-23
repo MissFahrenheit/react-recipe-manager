@@ -37,14 +37,14 @@ export default function Filters({
     <Sheet modal={false}>
       <SheetTrigger asChild>
         <Button variant="outline">
-          <Funnel />
+          <Funnel aria-hidden="true" />
           Filters
         </Button>
       </SheetTrigger>
       <SheetContent side="left">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
-            <Funnel className="size-4" /> Filter your recipes
+            <Funnel className="size-4" aria-hidden="true" /> Filter your recipes
           </SheetTitle>
           <SheetDescription>
             Select values to narrow down your results
@@ -87,7 +87,11 @@ export default function Filters({
           </div>
 
           {filtersSelected && (
-            <Button variant="outline" onClick={onClearFilters}>
+            <Button
+              variant="outline"
+              aria-label="Clear all filters"
+              onClick={onClearFilters}
+            >
               <Trash2 />
               Clear filters
             </Button>

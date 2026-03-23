@@ -13,8 +13,6 @@ export default function SelectedFilters({
   defaultValues,
   onFilterRemove,
 }: SelectedFiltersProps): JSX.Element {
-  console.log({ defaultValues })
-  console.log({ filterValues })
   function filterValuesLabel(
     field: keyof FilterValues,
     value: unknown
@@ -41,7 +39,7 @@ export default function SelectedFilters({
     defaultValues: FilterValues
   ): JSX.Element | null {
     if (value === defaultValues[field]) return null
-    if ((value as string[]).length === 0) {
+    if (Array.isArray(value) && value.length === 0) {
       return null
     }
 
@@ -49,10 +47,11 @@ export default function SelectedFilters({
       <Button
         variant="outline"
         className="h-auto rounded-2xl py-1 pl-3 text-xs"
+        aria-label={`Remove filter: ${filterValuesLabel(field, value)}`}
         onClick={() => onFilterRemove(field)}
       >
         {filterValuesLabel(field, value)}
-        <X className="size-3" />
+        <X className="size-3" aria-hidden="true" />
       </Button>
     )
   }

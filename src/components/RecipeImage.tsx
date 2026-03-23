@@ -67,7 +67,10 @@ export default function RecipeImage({
         )}
       />
       {!imageLoaded && (
-        <Skeleton className="absolute top-0 z-30 aspect-video w-full rounded-none" />
+        <Skeleton
+          aria-hidden="true"
+          className="absolute top-0 z-30 aspect-video w-full rounded-none"
+        />
       )}
     </>
   )

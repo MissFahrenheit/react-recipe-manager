@@ -20,23 +20,35 @@ export default function DifficultyFilter({
         defaultValue={difficulty}
         variant="outline"
         className="w-full"
+        aria-label="Filter by difficulty"
         onValueChange={(val) => onChange("difficulty", val)}
       >
-        <ToggleGroupItem value="Any" aria-label="Toggle Any" className="grow">
+        <ToggleGroupItem
+          value="Any"
+          aaria-label="Filter by difficulty: Any"
+          className="grow"
+        >
           Any
         </ToggleGroupItem>
-        <ToggleGroupItem value="Easy" aria-label="Toggle Easy" className="grow">
+        <ToggleGroupItem
+          value="Easy"
+          aria-label="Filter by difficulty: Easy"
+          className="grow"
+        >
           Easy
         </ToggleGroupItem>
         <ToggleGroupItem
           value="Medium"
-          aria-label="Toggle Medium"
+          aria-label="Filter by difficulty: Medium"
           className="grow"
         >
           Medium
         </ToggleGroupItem>
-
-        <ToggleGroupItem value="Hard" aria-label="Toggle Hard" className="grow">
+        <ToggleGroupItem
+          value="Hard"
+          aria-label="Filter by difficulty: Hard"
+          className="grow"
+        >
           Hard
         </ToggleGroupItem>
       </ToggleGroup>

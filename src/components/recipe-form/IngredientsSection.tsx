@@ -64,7 +64,7 @@ export default function IngredientsSection({
       <h3 className="text-xl font-semibold">Ingredients</h3>
 
       {recipeIngredients.length > 0 && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="list">
           {recipeIngredients.map((ingredient: Ingredient, idx: number) => (
             <AddedIngredient
               key={idx}
@@ -82,7 +82,7 @@ export default function IngredientsSection({
       />
 
       {ingredientsError && (
-        <FieldError>Please add at least 1 ingredient</FieldError>
+        <FieldError role="alert">Please add at least 1 ingredient</FieldError>
       )}
     </section>
   )

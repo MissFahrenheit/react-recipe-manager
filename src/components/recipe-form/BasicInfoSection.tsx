@@ -31,7 +31,6 @@ export default function BasicInfoSection({
           type="text"
           placeholder="e.g. Spaghetti Bolognese"
           required={true}
-          aria-required={true}
           value={recipeForm.name}
           onChange={(e) => onChange("name", e.target.value)}
         />
@@ -44,7 +43,6 @@ export default function BasicInfoSection({
           type="text"
           placeholder="Italian, Mexican..."
           required={true}
-          aria-required={true}
           value={recipeForm.cuisine}
           onChange={(e) => onChange("cuisine", e.target.value)}
         />
@@ -56,7 +54,6 @@ export default function BasicInfoSection({
           placeholder="A few words about this recipe"
           name="description"
           required={true}
-          aria-required={true}
           value={recipeForm.description}
           onChange={(e) => onChange("description", e.target.value)}
         />
@@ -70,7 +67,6 @@ export default function BasicInfoSection({
             type="number"
             placeholder="10"
             required={true}
-            aria-required={true}
             value={recipeForm.prepTime === 0 ? "" : recipeForm.prepTime}
             onChange={(e) => onChange("prepTime", Number(e.target.value))}
           />
@@ -83,7 +79,6 @@ export default function BasicInfoSection({
             type="number"
             placeholder="10"
             required={true}
-            aria-required={true}
             value={recipeForm.cookTime === 0 ? "" : recipeForm.cookTime}
             onChange={(e) => onChange("cookTime", Number(e.target.value))}
           />
@@ -99,19 +94,18 @@ export default function BasicInfoSection({
             placeholder="4"
             min={1}
             required={true}
-            aria-required={true}
             value={recipeForm.servings === 0 ? "" : recipeForm.servings}
             onChange={(e) => onChange("servings", Number(e.target.value))}
           />
         </Field>
         <Field>
-          <FieldLabel>Difficulty</FieldLabel>
+          <FieldLabel htmlFor="difficulty">Difficulty</FieldLabel>
           <Select
             defaultValue="Easy"
             value={recipeForm.difficulty}
             onValueChange={(val) => onChange("difficulty", val as Difficulty)}
           >
-            <SelectTrigger className="w-full">
+            <SelectTrigger id="difficulty" className="w-full">
               <SelectValue placeholder="Select difficulty level" />
             </SelectTrigger>
             <SelectContent>

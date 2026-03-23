@@ -23,7 +23,7 @@ type DesktopViewProps = {
 
 export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
   return (
-    <article className="overflow-scroll">
+    <article aria-label={recipe.name} className="overflow-scroll">
       <ResizablePanelGroup
         orientation="horizontal"
         className="max-h-[calc(100svh-var(--header-height))] min-h-[calc(100svh-var(--header-height))]"
@@ -85,7 +85,7 @@ export default function DesktopView({ recipe }: DesktopViewProps): JSX.Element {
             {recipe.ingredients && (
               <>
                 <h2 className="mb-5 text-xl font-semibold">Ingredients</h2>
-                <div className="flex flex-col gap-3 pr-2 md:gap-5">
+                <div className="flex flex-col gap-3 pr-2 md:gap-5" role="list">
                   <IngredientsList recipeIngredients={recipe.ingredients} />
                 </div>
               </>

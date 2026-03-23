@@ -15,7 +15,11 @@ export default function EditButton({ recipeId }: EditButtonProps): JSX.Element {
   }
 
   return (
-    <Button variant="outline" onClick={handleEditClick}>
+    <Button
+      variant="outline"
+      aria-label="Edit recipe"
+      onClick={handleEditClick}
+    >
       <Pencil />
       Edit
     </Button>

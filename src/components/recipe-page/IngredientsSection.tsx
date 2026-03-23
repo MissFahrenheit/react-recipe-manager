@@ -29,12 +29,17 @@ export default function IngredientsSection({
         <h2 className="text-xl font-semibold">Ingredients</h2>
         <CollapsibleTrigger asChild>
           <Button variant="ghost" size="icon" className="size-8">
-            <ChevronsUpDown />
-            <span className="sr-only">Toggle ingredients</span>
+            <ChevronsUpDown aria-hidden="true" />
+            <span className="sr-only">
+              {ingredientsOpen ? "Collapse ingredients" : "Expand ingredients"}
+            </span>
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent className="mt-3 flex flex-col gap-3 pr-2 text-sm">
+      <CollapsibleContent
+        className="mt-3 flex flex-col gap-3 pr-2 text-sm"
+        role="list"
+      >
         <IngredientsList recipeIngredients={recipeIngredients} />
       </CollapsibleContent>
     </Collapsible>

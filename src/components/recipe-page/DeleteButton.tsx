@@ -49,7 +49,12 @@ export default function DeleteButton({
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button type="button" variant="destructive" onClick={handleClick}>
+          <Button
+            type="button"
+            variant="destructive"
+            aria-label={showLabel ? undefined : "Delete recipe"}
+            onClick={handleClick}
+          >
             Delete recipe
           </Button>
         </DialogFooter>

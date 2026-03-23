@@ -42,9 +42,9 @@ export default function Sorting({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" aria-label={`Sort by: ${currentLabel}`}>
           <span className="text-muted-foreground">Sort by:</span> {currentLabel}
-          <ArrowDownUp className="text-muted-foreground" />
+          <ArrowDownUp className="text-muted-foreground" aria-hidden="true" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

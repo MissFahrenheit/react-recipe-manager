@@ -54,12 +54,14 @@ export default function InstructionsSection({
 
       {recipeInstructions[recipeInstructions.length - 1] !== "" && (
         <Button variant="outline" type="button" onClick={showNewStepForm}>
-          <Plus />
+          <Plus aria-hidden="true" />
           Add another
         </Button>
       )}
 
-      {instructionsError && <FieldError>Please add at least 1 step</FieldError>}
+      {instructionsError && (
+        <FieldError role="alert">Please add at least 1 step</FieldError>
+      )}
     </section>
   )
 }

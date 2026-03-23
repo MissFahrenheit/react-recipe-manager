@@ -6,15 +6,15 @@ import type {
 } from "@/types"
 import { seedRecipes } from "./seedRecipes"
 
-const storageKey: string | undefined = import.meta.env.VITE_STORAGE_KEY
+const STORAGE_KEY = "recipe-manager-recipes"
 
 function getStorageKey(): string {
-  if (!storageKey) {
+  if (!STORAGE_KEY) {
     throw new Error(
       "Storage key is not defined. Check your .env file for VITE_STORAGE_KEY."
     )
   }
-  return storageKey
+  return STORAGE_KEY
 }
 
 export function getRecipes(): Recipe[] {

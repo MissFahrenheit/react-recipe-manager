@@ -92,8 +92,9 @@ export default function NewIngredient({
           >
             <ComboboxInput
               aria-required={true}
+              aria-invalid={!!itemError}
+              aria-describedby={itemError ? "item-error" : undefined}
               placeholder="Select an ingredient"
-              aria-invalid={itemError ? true : false}
             />
             <ComboboxContent>
               <ComboboxEmpty>No items found.</ComboboxEmpty>
@@ -106,21 +107,25 @@ export default function NewIngredient({
               </ComboboxList>
             </ComboboxContent>
           </Combobox>
-          <FieldError>{itemError}</FieldError>
+          {itemError && <FieldError id="item-error">{itemError}</FieldError>}
         </Field>
         <div className="grid grid-cols-2 gap-4">
           <Field>
             <FieldLabel htmlFor="ingredientQuantity">Quantity *</FieldLabel>
             <Input
+              aria-required={true}
+              aria-invalid={!!quantityError}
+              aria-describedby={quantityError ? "quantity-error" : undefined}
               name="ingredientQuantity"
               id="ingredientQuantity"
               type="text"
               placeholder="e.g. 3 or to taste"
               value={newIngredient.quantity}
               onChange={(e) => updateIngredientQuantity(e.target.value)}
-              aria-required={true}
             />
-            <FieldError>{quantityError}</FieldError>
+            {quantityError && (
+              <FieldError id="quantity-error">{quantityError}</FieldError>
+            )}
           </Field>
           <Field>
             <FieldLabel htmlFor="ingredientUnit">Unit</FieldLabel>
@@ -153,7 +158,6 @@ export default function NewIngredient({
           variant="outline"
           onClick={handleAddIngredient}
           disabled={isButtonDisabled}
-          aria-disabled={isButtonDisabled}
         >
           Save ingredient
         </Button>

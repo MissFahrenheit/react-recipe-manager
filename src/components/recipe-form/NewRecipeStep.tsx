@@ -15,11 +15,11 @@ export default function NewRecipeStep({
 }: NewRecipeStepProps): JSX.Element {
   return (
     <Field>
-      <FieldLabel htmlFor="step">Step {index + 1}</FieldLabel>
+      <FieldLabel htmlFor={`step-${index}`}>Step {index + 1}</FieldLabel>
       <Textarea
-        id="step"
+        id={`step-${index}`}
+        name={`step-${index}`}
         placeholder="Step by step instructions"
-        name="step"
         value={value}
         onChange={(e) => updateInstructionStep(index, e.target.value)}
       />

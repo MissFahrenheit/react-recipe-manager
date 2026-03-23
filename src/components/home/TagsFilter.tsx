@@ -29,10 +29,13 @@ export default function TagsFilter({
 
   return (
     <div>
-      <Label className="mb-2">Tags</Label>
+      <Label id="tags-filter-label" className="mb-2">
+        Tags
+      </Label>
       <Combobox
         multiple
         autoHighlight
+        aria-labelledby="tags-filter-label"
         items={tags}
         value={selectedTags}
         onValueChange={(val) => onChange("tags", val)}
