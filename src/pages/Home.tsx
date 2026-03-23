@@ -17,9 +17,8 @@ import SearchBar from "@/components/SearchBar"
 import Filters from "@/components/home/Filters"
 import SelectedFilters from "@/components/home/SelectedFilters"
 import Sorting from "@/components/home/Sorting"
+import EmptyRecipes from "@/components/home/EmptyRecipes"
 import RecipeCard from "@/components/RecipeCard"
-import { Button } from "@/components/ui/button"
-import { Trash2 } from "lucide-react"
 // import { resetRecipesToSeed } from "@/data/recipeService"
 
 export default function Home(): JSX.Element {
@@ -154,37 +153,13 @@ export default function Home(): JSX.Element {
           />
         )}
 
-        {recipes.length === 0 &&
-          (filtersSelected ? (
-            <div
-              role="status"
-              className="flex h-30 flex-col items-center justify-center gap-3"
-            >
-              <span className="text-muted-foreground">
-                No recipes found for the selected filters.
-              </span>
-              <Button
-                variant="outline"
-                onClick={resetFilters}
-                aria-label="Clear all filters"
-              >
-                <Trash2 />
-                Clear filters
-              </Button>
-            </div>
-          ) : (
-            <div
-              role="status"
-              className="flex h-30 flex-col items-center justify-center gap-1 text-center text-sm text-muted-foreground"
-            >
-              <p className="">No recipes added yet.</p>
-              <p>
-                {" "}
-                Click <span className="font-semibold">Add new</span> on the top
-                right to begin.
-              </p>
-            </div>
-          ))}
+        {recipes.length === 0 && (
+          <EmptyRecipes
+            filtersSelected={filtersSelected}
+            searchQuery={searchQuery}
+            onClearFilters={resetFilters}
+          />
+        )}
 
         <div
           className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
