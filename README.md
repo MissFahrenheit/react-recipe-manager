@@ -23,7 +23,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 ### Live Demo
 
-[https://react-recipe-manager-2x1nhpvqp-elviras-projects-a0568c57.vercel.app/](https://react-recipe-manager-2x1nhpvqp-elviras-projects-a0568c57.vercel.app/)
+[https://react-recipe-manager-tau.vercel.app/](https://react-recipe-manager-tau.vercel.app/)
 
 ### Tips
 - Press `d` to toggle dark mode
