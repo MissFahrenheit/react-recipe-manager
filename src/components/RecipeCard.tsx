@@ -19,7 +19,7 @@ type RecipeCardProps = {
 
 export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
   return (
-    <Card className="w-full max-w-120 pt-0">
+    <Card className="w-full pt-0">
       <div className="group relative">
         <Link
           aria-hidden="true"

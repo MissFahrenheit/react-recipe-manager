@@ -6,7 +6,13 @@ import type {
   SortDirection,
 } from "@/types"
 import { useState } from "react"
-import { filterRecipes, getRecipes, sortBy } from "@/data/recipeService"
+import {
+  filterRecipes,
+  getRecipes,
+  sortBy,
+  searchRecipesByTitle,
+} from "@/data/recipeService"
+import SearchBar from "@/components/SearchBar"
 import Filters from "@/components/home/Filters"
 import SelectedFilters from "@/components/home/SelectedFilters"
 import Sorting from "@/components/home/Sorting"
@@ -25,6 +31,7 @@ export default function Home(): JSX.Element {
   const [recipes, setRecipes] = useState<Recipe[]>(
     allRecipesSortedByNewestFirst
   )
+  const [searchQuery, setSearchQuery] = useState<string>("")
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
   const [sortField, setSortField] = useState<SortableField>("createdAt")
 
@@ -56,12 +63,24 @@ export default function Home(): JSX.Element {
       [filterName]: processedValue,
     }
     setFilterValues(updatedFilters)
-    setRecipes(sortBy(filterRecipes(updatedFilters), sortField, sortDirection))
+    setRecipes(
+      sortBy(
+        searchRecipesByTitle(filterRecipes(updatedFilters), searchQuery),
+        sortField,
+        sortDirection
+      )
+    )
   }
 
   function resetFilters(): void {
     setFilterValues(defaultFilterValues)
-    setRecipes(sortBy(allRecipes, sortField, sortDirection))
+    setRecipes(
+      sortBy(
+        searchRecipesByTitle(allRecipes, searchQuery),
+        sortField,
+        sortDirection
+      )
+    )
   }
 
   function removeFilter(field: keyof FilterValues): void {
@@ -75,9 +94,22 @@ export default function Home(): JSX.Element {
   }
 
   function sortRecipes(field: SortableField, direction: SortDirection): void {
-    setRecipes(sortBy(recipes, field, direction))
     setSortDirection(direction)
     setSortField(field)
+    setRecipes(
+      sortBy(
+        searchRecipesByTitle(filterRecipes(filterValues), searchQuery),
+        field,
+        direction
+      )
+    )
+  }
+
+  function handleSearch(query: string): void {
+    setSearchQuery(query)
+    const filtered = filterRecipes(filterValues)
+    const searched = searchRecipesByTitle(filtered, query)
+    setRecipes(sortBy(searched, sortField, sortDirection))
   }
 
   return (
@@ -86,19 +118,25 @@ export default function Home(): JSX.Element {
         {/*<Button variant="outline" onClick={() => resetRecipesToSeed()}>
           Reset recipes
         </Button>*/}
-        <div className="flex w-full justify-between gap-3">
-          <Filters
-            filterValues={filterValues}
-            onFilterChange={updateFilters}
-            defaultFilterValues={defaultFilterValues}
-            onClearFilters={resetFilters}
-          />
-          <Sorting
-            direction={sortDirection}
-            field={sortField}
-            onChange={sortRecipes}
-          />
+        <div className="mt-4 flex w-full flex-col justify-between gap-2 sm:flex-row sm:gap-4">
+          <div className="w-full sm:w-1/2 lg:w-[calc(33.333%-.5rem)] 2xl:w-[calc(25%-.75rem)]">
+            <SearchBar value={searchQuery} onChange={handleSearch} />
+          </div>
+          <div className="flex w-full items-center justify-between gap-2 sm:w-1/2 sm:justify-end lg:w-1/3 2xl:w-1/4">
+            <Filters
+              filterValues={filterValues}
+              onFilterChange={updateFilters}
+              defaultFilterValues={defaultFilterValues}
+              onClearFilters={resetFilters}
+            />
+            <Sorting
+              direction={sortDirection}
+              field={sortField}
+              onChange={sortRecipes}
+            />
+          </div>
         </div>
+
         {filtersSelected && (
           <SelectedFilters
             filterValues={filterValues}

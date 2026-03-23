@@ -110,6 +110,18 @@ export function getAllCuisines(): string[] {
   return cuisines
 }
 
+export function searchRecipesByTitle(
+  recipes: Recipe[],
+  query: string
+): Recipe[] {
+  if (!query.trim()) {
+    return recipes
+  }
+  return recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(query.toLowerCase())
+  )
+}
+
 export function filterRecipes(filters: FilterValues): Recipe[] {
   const recipes: Recipe[] = getRecipes()
   const filteredRecipes = recipes.filter((recipe: Recipe) => {

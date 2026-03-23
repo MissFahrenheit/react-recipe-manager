@@ -42,7 +42,11 @@ export default function Sorting({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" aria-label={`Sort by: ${currentLabel}`}>
+        <Button
+          variant="outline"
+          aria-label={`Sort by: ${currentLabel}`}
+          className=""
+        >
           <span className="text-muted-foreground">Sort by:</span> {currentLabel}
           <ArrowDownUp className="text-muted-foreground" aria-hidden="true" />
         </Button>
