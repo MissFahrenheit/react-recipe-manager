@@ -66,6 +66,7 @@ export default function BasicInfoSection({
             id="prepTime"
             type="number"
             placeholder="10"
+            min={0}
             required={true}
             value={recipeForm.prepTime === 0 ? "" : recipeForm.prepTime}
             onChange={(e) => onChange("prepTime", Number(e.target.value))}
@@ -78,6 +79,7 @@ export default function BasicInfoSection({
             id="cookTime"
             type="number"
             placeholder="10"
+            min={0}
             required={true}
             value={recipeForm.cookTime === 0 ? "" : recipeForm.cookTime}
             onChange={(e) => onChange("cookTime", Number(e.target.value))}

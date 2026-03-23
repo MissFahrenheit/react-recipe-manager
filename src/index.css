@@ -163,3 +163,11 @@
     @apply rounded-lg rounded-tr-none rounded-br-none border border-input;
   }
 }
+
+::placeholder {
+  @apply text-gray-300;
+}
+
+.dark ::placeholder {
+  @apply text-neutral-500;
+}

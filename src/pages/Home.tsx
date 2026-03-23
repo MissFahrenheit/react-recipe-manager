@@ -20,6 +20,7 @@ import Sorting from "@/components/home/Sorting"
 import EmptyRecipes from "@/components/home/EmptyRecipes"
 import RecipeCard from "@/components/RecipeCard"
 // import { resetRecipesToSeed } from "@/data/recipeService"
+// import { Button } from "@/components/ui/button"
 
 export default function Home(): JSX.Element {
   usePageTitle("Home")
@@ -127,7 +128,7 @@ export default function Home(): JSX.Element {
           Reset recipes
         </Button>*/}
         <div className="mt-4 flex w-full flex-col justify-between gap-2 sm:flex-row sm:gap-4">
-          <div className="w-full sm:w-1/2 lg:w-[calc(33.333%-.5rem)] 2xl:w-[calc(25%-.75rem)]">
+          <div className="w-full sm:w-1/2 lg:w-[calc(33.333%-.75rem)] 2xl:w-[calc(25%-.75rem)]">
             <SearchBar value={searchQuery} onChange={handleSearch} />
           </div>
           <div className="flex w-full items-center justify-between gap-2 sm:w-1/2 sm:justify-end lg:w-1/3 2xl:w-1/4">
