@@ -48,7 +48,6 @@ export default function Recipe(): JSX.Element {
       navigate("/404")
     }
   }, [recipeExists, navigate])
-  // if (!recipe) return <Error404 /> @TODO add this to notes
 
   function handleUploadComplete(url: string, publicId: string): void {
     setImageUrl(url)

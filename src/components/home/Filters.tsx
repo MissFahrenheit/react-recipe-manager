@@ -88,18 +88,11 @@ export default function Filters({
 
           {filtersSelected && (
             <Button variant="outline" onClick={onClearFilters}>
-              {/*<Trash2 className="stroke-red-600" />*/}
               <Trash2 />
               Clear filters
             </Button>
           )}
         </div>
-
-        {/*<SheetFooter>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter>*/}
       </SheetContent>
     </Sheet>
   )

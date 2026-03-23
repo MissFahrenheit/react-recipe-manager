@@ -99,8 +99,6 @@ export default function Home(): JSX.Element {
             onChange={sortRecipes}
           />
         </div>
-        {/*@TODO: note down why selected Sheet instead of Drawer, even through drawer closes more easily on mobiles
-      reminder: it was because slider was not working well, it would move the drawer too*/}
         {filtersSelected && (
           <SelectedFilters
             filterValues={filterValues}
@@ -123,9 +121,6 @@ export default function Home(): JSX.Element {
           {recipeCards}
         </div>
       </div>
-      {/*<div className="font-mono text-xs text-muted-foreground">
-        (Press <kbd>d</kbd> to toggle dark mode)
-      </div>*/}
     </>
   )
 }

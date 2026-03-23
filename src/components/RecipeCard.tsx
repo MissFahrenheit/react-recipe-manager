@@ -47,7 +47,6 @@ export default function RecipeCard({ recipe }: RecipeCardProps): JSX.Element {
             <Clock className="size-4" />
             <span>{recipe.prepTime + recipe.cookTime}'</span>
           </div>
-          {/*<Separator orientation="vertical" />*/}
           <div className="flex items-center gap-1">
             <Users className="size-4" />
             <span>{recipe.servings}</span>
