@@ -93,7 +93,13 @@ export default function Home(): JSX.Element {
       [field]: defaultValue,
     }
     setFilterValues(updatedFilters)
-    setRecipes(sortBy(filterRecipes(updatedFilters), sortField, sortDirection))
+    setRecipes(
+      sortBy(
+        searchRecipesByTitle(filterRecipes(updatedFilters), searchQuery),
+        sortField,
+        sortDirection
+      )
+    )
   }
 
   function sortRecipes(field: SortableField, direction: SortDirection): void {
@@ -147,24 +153,39 @@ export default function Home(): JSX.Element {
             onFilterRemove={removeFilter}
           />
         )}
-        {filtersSelected && recipes.length === 0 && (
-          <div
-            role="status"
-            className="flex h-30 flex-col items-center justify-center gap-3"
-          >
-            <span className="text-muted-foreground">
-              No recipes found for the selected filters.
-            </span>
-            <Button
-              variant="outline"
-              onClick={resetFilters}
-              aria-label="Clear all filters"
+
+        {recipes.length === 0 &&
+          (filtersSelected ? (
+            <div
+              role="status"
+              className="flex h-30 flex-col items-center justify-center gap-3"
             >
-              <Trash2 />
-              Clear filters
-            </Button>
-          </div>
-        )}
+              <span className="text-muted-foreground">
+                No recipes found for the selected filters.
+              </span>
+              <Button
+                variant="outline"
+                onClick={resetFilters}
+                aria-label="Clear all filters"
+              >
+                <Trash2 />
+                Clear filters
+              </Button>
+            </div>
+          ) : (
+            <div
+              role="status"
+              className="flex h-30 flex-col items-center justify-center gap-1 text-center text-sm text-muted-foreground"
+            >
+              <p className="">No recipes added yet.</p>
+              <p>
+                {" "}
+                Click <span className="font-semibold">Add new</span> on the top
+                right to begin.
+              </p>
+            </div>
+          ))}
+
         <div
           className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
           aria-label="Recipes"
