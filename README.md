@@ -60,6 +60,8 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 **Recipe card content** — The card shows image, title, description, total time, servings, and the favorite toggle. Tags, separate prep/cook times, ingredient counts, and step counts are intentionally omitted. These add visual clutter without meaningfully helping someone decide whether a recipe interests them.
 
+**Ingredient input** — Instead of a free-text field, ingredients are selected from a predefined list sourced from [TheMealDB](https://www.themealdb.com/api/json/v1/1/list.php?i=list). This keeps ingredient data clean and consistent, and makes the autocomplete experience more useful since the list covers virtually any ingredient you'd need.
+
 **Selected filters always visible** — Filters live inside a sheet to save space, but the currently active filters are always shown inline above the results. On mobile this costs some vertical space, but knowingat a glance what filters are applied and being able to remove them one by one is worth it, especially since the filter panel is hidden by default.
 
 **Filters in a sheet instead of a drawer** — Drawers are generally nicer on mobile since they can be dismissed with a swipe. However, the prep and cook time sliders created a drag conflict with the drawer's swipe-to-close gesture, making the experience unreliable. A sheet avoids this entirely.

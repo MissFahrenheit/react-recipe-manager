@@ -8,8 +8,6 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  // SheetClose,
-  // SheetFooter,
 } from "@/components/ui/sheet"
 import TimeFilter from "./TimeFilter"
 import DifficultyFilter from "./DifficultyFilter"
